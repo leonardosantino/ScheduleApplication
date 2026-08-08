@@ -1,10 +1,10 @@
 package com.application.domain.entity
 
-import jakarta.persistence.Entity
-import jakarta.persistence.Id
+import org.springframework.data.annotation.Id
+import org.springframework.data.mongodb.core.mapping.Document
 import java.time.Instant
 
-@Entity(name = "providers")
+@Document(collection = "providers")
 class Provider(
     @Id
     var id: String?,

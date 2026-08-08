@@ -1,7 +1,3 @@
 spring:
   application:
     name: schedule
-
-  datasource:
-    url: jdbc:h2:mem:schedule
-    driver-class-name: org.h2.Driver

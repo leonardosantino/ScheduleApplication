@@ -43,7 +43,6 @@ out/
 .DS_Store
 
 ### Docker
-docker-compose.yml
 
 ### rsa
 rsa.pem

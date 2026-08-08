@@ -1,8 +1,8 @@
 package com.application.repository
 
 import com.application.domain.entity.User
-import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.data.mongodb.repository.MongoRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface UserRepository : JpaRepository<User, String>
+interface UserRepository : MongoRepository<User, String>

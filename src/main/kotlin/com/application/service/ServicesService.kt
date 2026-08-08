@@ -28,7 +28,7 @@ data class ServiceResponse(
 }
 
 data class ServiceRequest(
-    var id: Long?,
+    var id: String?,
     var userId: String,
     var name: String,
     var description: String,
