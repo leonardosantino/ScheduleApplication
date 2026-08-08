@@ -2,13 +2,17 @@
 
 Spring boot Run:
 
-```bash
+```shell
     ./gradlew bootRun --args='--spring.profiles.active=dev'
 ```
 
-Postgres sequence:
-```bash
-    SELECT sequencename FROM pg_sequences;
+MongoDB:
+```shell
+    db.getUsers()
     
-    SELECT setval('examples_id_seq', (SELECT MAX(id) FROM examples));
-```
+    db.createUser({
+        user: "schedule",
+        pwd: "XaY2cMuXdJ4I7aJA",
+        roles: [ { role: "readWrite", db: "schedule" } ]
+    })
+````

@@ -1,3 +1,3 @@
 spring:
   mongodb:
-    uri: mongodb://local:XaY2cMuXdJ4I7aJA@localhost:27017/schedule
+    uri: mongodb://schedule:XaY2cMuXdJ4I7aJA@localhost:27017/schedule
