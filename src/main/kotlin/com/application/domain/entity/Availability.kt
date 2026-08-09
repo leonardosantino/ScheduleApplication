@@ -8,12 +8,11 @@ class Availability(
     @Id
     var id: String?,
     var userId: String,
-    var days: MutableList<AvailabilityDay>?,
+    var days: MutableMap<String, AvailabilityDay>?,
 )
 
 class AvailabilityDay(
-    var name: String,
-    var periods: MutableList<AvailabilityPeriod>?,
+    var periods: MutableMap<Int, AvailabilityPeriod>?,
 )
 
 class AvailabilityPeriod(

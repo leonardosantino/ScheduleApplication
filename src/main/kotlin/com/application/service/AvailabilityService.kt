@@ -12,4 +12,6 @@ class AvailabilityService(
     fun save(request: AvailabilityRequest): Availability = availabilityRepository.save(request.toAvailability())
 
     fun findById(id: String) = availabilityRepository.findById(id)
+
+    fun findByUserId(id: String) = availabilityRepository.findByUserId(id)
 }

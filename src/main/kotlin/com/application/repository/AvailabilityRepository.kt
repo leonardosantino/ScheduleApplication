@@ -5,4 +5,6 @@ import org.springframework.data.mongodb.repository.MongoRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface AvailabilityRepository : MongoRepository<Availability, String>
+interface AvailabilityRepository : MongoRepository<Availability, String> {
+    fun findByUserId(id: String): Availability
+}

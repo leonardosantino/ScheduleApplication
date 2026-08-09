@@ -25,29 +25,32 @@ class AvailabilityController(
     fun findById(
         @PathVariable id: String,
     ) = availabilityService.findById(id)
+
+    @GetMapping("/user/{id}")
+    fun findByUserId(
+        @PathVariable id: String,
+    ) = availabilityService.findByUserId(id)
 }
 
 class AvailabilityRequest(
     var id: String?,
     var userId: String,
-    var days: MutableList<AvailabilityDayRequest>?,
+    var days: MutableMap<String, AvailabilityDayRequest>?,
 ) {
     fun toAvailability() =
         Availability(
             id = id,
             userId = userId,
-            days = days?.map { it.toAvailabilityDay() }?.toMutableList(),
+            days = days?.mapValues { it.value.toAvailabilityDay() }?.toMutableMap(),
         )
 }
 
 class AvailabilityDayRequest(
-    var name: String,
-    var periods: MutableList<AvailabilityPeriodRequest>?,
+    var periods: MutableMap<Int, AvailabilityPeriodRequest>?,
 ) {
     fun toAvailabilityDay() =
         AvailabilityDay(
-            name = name,
-            periods = periods?.map { it.toAvailabilityPeriod() }?.toMutableList(),
+            periods = periods?.mapValues { it.value.toAvailabilityPeriod() }?.toMutableMap(),
         )
 }
 
