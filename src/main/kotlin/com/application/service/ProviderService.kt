@@ -1,6 +1,6 @@
 package com.application.service
 
-import com.application.controller.ProviderRequest
+import com.application.model.dto.request.ProviderRequest
 import com.application.repository.ProviderRepository
 import org.springframework.stereotype.Service
 

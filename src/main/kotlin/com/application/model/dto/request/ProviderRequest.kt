@@ -1,0 +1,39 @@
+package com.application.model.dto.request
+
+import com.application.domain.entity.Provider
+import com.application.domain.objects.UserStatus
+import java.text.Normalizer
+import java.text.Normalizer.normalize
+import java.time.Instant
+
+data class ProviderRequest(
+    var id: String,
+    var name: String,
+    var role: String,
+    var description: String,
+) {
+    fun toCreate(): Provider =
+        Provider(
+            id = id,
+            slug =
+                name.lowercase().let {
+                    normalize(it, Normalizer.Form.NFD)
+                        .replace(Regex("\\p{InCombiningDiacriticalMarks}+"), "")
+                        .replace(" ", "")
+                },
+            name = name,
+            role = role,
+            description = description,
+            status = UserStatus.ENABLED.value,
+            createdAt = Instant.now(),
+            updatedAt = Instant.now(),
+        )
+
+    fun toUpdate(provider: Provider): Provider {
+        provider.name = name
+        provider.role = role
+        provider.description = description
+
+        return provider
+    }
+}

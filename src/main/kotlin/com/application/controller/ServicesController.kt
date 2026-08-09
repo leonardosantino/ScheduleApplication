@@ -1,6 +1,8 @@
 package com.application.controller
 
-import com.application.service.ServiceRequest
+import com.application.model.dto.request.ServiceRequest
+import com.application.model.dto.response.ServiceListResponse
+import com.application.model.dto.response.ServiceResponse
 import com.application.service.ServicesService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -17,10 +19,10 @@ class ServicesController(
     @PostMapping
     fun save(
         @RequestBody user: ServiceRequest,
-    ) = servicesService.save(user)
+    ) = servicesService.save(user).let { ServiceResponse.from(it) }
 
     @GetMapping("/provider/{id}")
     fun findAllByProviderId(
         @PathVariable id: String,
-    ) = servicesService.findAllByProviderId(id)
+    ) = servicesService.findAllByProviderId(id).let { ServiceListResponse.from(it) }
 }

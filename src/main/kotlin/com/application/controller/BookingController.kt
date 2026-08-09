@@ -1,6 +1,8 @@
 package com.application.controller
 
-import com.application.service.BookingRequest
+import com.application.model.dto.request.BookingRequest
+import com.application.model.dto.response.BookingListResponse
+import com.application.model.dto.response.BookingResponse
 import com.application.service.BookingService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -17,15 +19,15 @@ class BookingController(
     @PostMapping
     fun save(
         @RequestBody request: BookingRequest,
-    ) = bookingService.save(request)
+    ) = bookingService.save(request).let { BookingResponse.from(it) }
 
     @GetMapping("/provider/{id}")
     fun findAllByProviderId(
         @PathVariable id: String,
-    ) = bookingService.findAllByProviderId(id)
+    ) = bookingService.findAllByProviderId(id).let { BookingListResponse.from(it) }
 
     @GetMapping("/user/{id}")
     fun findAllByUserId(
         @PathVariable id: String,
-    ) = bookingService.findAllByUserId(id)
+    ) = bookingService.findAllByUserId(id).let { BookingListResponse.from(it) }
 }

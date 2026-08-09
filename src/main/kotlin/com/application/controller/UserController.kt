@@ -1,6 +1,6 @@
 package com.application.controller
 
-import com.application.domain.entity.User
+import com.application.model.dto.request.UpdatePhoneRequest
 import com.application.model.dto.request.UserRequest
 import com.application.model.dto.response.UserResponse
 import com.application.service.UserService
@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
-import java.time.Instant
 
 @RestController
 @RequestMapping("/users")
@@ -35,19 +34,5 @@ class UserController(
     @GetMapping("/{id}")
     fun findById(
         @PathVariable id: String,
-    ) = userService
-        .findById(id)
-        .ifPresent { UserResponse.from(it) }
-}
-
-class UpdatePhoneRequest(
-    var id: String,
-    var phone: String,
-) {
-    fun toUser(user: User): User {
-        user.phone = phone
-        user.updatedAt = Instant.now()
-
-        return user
-    }
+    ) = userService.findById(id).map { UserResponse.from(it) }
 }
