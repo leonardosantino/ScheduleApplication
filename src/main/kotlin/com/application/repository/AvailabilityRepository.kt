@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface AvailabilityRepository : MongoRepository<Availability, String> {
-    fun findByUserId(id: String): Availability
+    fun findByUserId(id: String): Availability?
 }

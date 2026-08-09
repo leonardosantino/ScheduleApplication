@@ -14,6 +14,7 @@ plugins {
 }
 
 dependencies {
+    val cognitoidentityprovider = "2.45.1"
     val hibernateValidator = "9.1.0.Final"
     val jakartaValidationApi = "3.1.1"
     val flapdoodle = "4.33.0"
@@ -25,6 +26,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
 
+    implementation("software.amazon.awssdk:cognitoidentityprovider:$cognitoidentityprovider")
     implementation("org.hibernate.validator:hibernate-validator:$hibernateValidator")
     implementation("jakarta.validation:jakarta.validation-api:$jakartaValidationApi")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")

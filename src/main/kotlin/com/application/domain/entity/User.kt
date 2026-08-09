@@ -8,6 +8,7 @@ import java.time.Instant
 class User(
     @Id
     var id: String?,
+    var username: String,
     var name: String,
     var lastName: String,
     var birthdate: Instant?,

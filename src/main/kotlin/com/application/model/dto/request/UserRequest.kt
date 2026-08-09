@@ -6,6 +6,7 @@ import java.time.Instant
 
 data class UserRequest(
     var id: String,
+    var username: String,
     var name: String,
     var lastName: String,
     var email: String,
@@ -15,6 +16,7 @@ data class UserRequest(
     fun toCreate(): User =
         User(
             id = id,
+            username = username,
             name = name,
             lastName = lastName,
             phone = phone,
