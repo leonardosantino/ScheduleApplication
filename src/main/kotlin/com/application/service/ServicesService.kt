@@ -13,9 +13,9 @@ class ServicesService(
 ) {
     fun save(request: ServiceRequest) = servicesRepository.save(request.toCreate())
 
-    fun findAllByUserId(id: String) =
+    fun findAllByProviderId(id: String) =
         servicesRepository
-            .findAllByUserId(id)
+            .findAllByProviderId(id)
             .let { ServiceResponse.toListResponse(it) }
 }
 
@@ -29,7 +29,7 @@ data class ServiceResponse(
 
 data class ServiceRequest(
     var id: String?,
-    var userId: String,
+    var providerId: String,
     var name: String,
     var description: String,
     var time: Long,
@@ -41,7 +41,7 @@ data class ServiceRequest(
     fun toCreate() =
         Services(
             id = null,
-            userId = userId,
+            providerId = providerId,
             name = name,
             description = description,
             time = time,
