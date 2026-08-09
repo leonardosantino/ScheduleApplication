@@ -1,11 +1,12 @@
 package com.application.service
 
 import com.application.domain.entity.Booking
-import com.application.domain.objects.BookingStatus
+import com.application.domain.entity.BookingUser
 import com.application.repository.BookingRepository
 import org.springframework.stereotype.Service
 import java.math.BigDecimal
 import java.time.Instant
+import com.application.domain.entity.BookingService as BookingServiceEntity
 
 @Service
 class BookingService(
@@ -15,7 +16,7 @@ class BookingService(
 
     fun findAllByProviderId(id: String) =
         bookingRepository
-            .findAllByProviderId(id)
+            .findAllByServiceProviderId(id)
             .let { BookingResponse.toListResponse(it) }
 
     fun findAllByUserId(id: String) =
@@ -34,29 +35,53 @@ data class BookingResponse(
 
 data class BookingRequest(
     var id: String?,
-    var userId: String,
-    var providerId: String,
-    var name: String,
-    var description: String,
+    var user: BookingUserRequest,
+    var service: BookingServiceRequest,
     var date: Instant,
     var time: Double,
-    var value: BigDecimal,
-    var status: String?,
-    var createdAt: Instant?,
-    var updatedAt: Instant?,
 ) {
     fun toCreate() =
         Booking(
             id = null,
-            userId = userId,
+            user = user.toBookingUser(),
+            service = service.toBookingService(),
+            date = date,
+            time = time,
+            createdAt = Instant.now(),
+            updatedAt = Instant.now(),
+        )
+}
+
+data class BookingUserRequest(
+    var id: String,
+    var name: String,
+    var lastName: String,
+    var phone: String?,
+) {
+    fun toBookingUser() =
+        BookingUser(
+            id = id,
+            name = name,
+            lastName = lastName,
+            phone = phone,
+        )
+}
+
+data class BookingServiceRequest(
+    var id: String,
+    var providerId: String,
+    var name: String,
+    var description: String,
+    var time: Long,
+    var value: BigDecimal,
+) {
+    fun toBookingService() =
+        BookingServiceEntity(
+            id = id,
             providerId = providerId,
             name = name,
             description = description,
-            date = date,
             time = time,
             value = value,
-            status = BookingStatus.CONFIRMED.value,
-            createdAt = Instant.now(),
-            updatedAt = Instant.now(),
         )
 }

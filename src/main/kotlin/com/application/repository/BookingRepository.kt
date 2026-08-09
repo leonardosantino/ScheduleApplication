@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface BookingRepository : MongoRepository<Booking, String> {
-    fun findAllByProviderId(id: String): List<Booking>
+    fun findAllByServiceProviderId(id: String): List<Booking>
 
     fun findAllByUserId(id: String): List<Booking>
 }

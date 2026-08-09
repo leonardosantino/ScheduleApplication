@@ -8,15 +8,27 @@ import java.time.Instant
 @Document(collection = "bookings")
 data class Booking(
     @Id
-    var id: String? = null,
-    var userId: String,
+    var id: String?,
+    var user: BookingUser,
+    var service: BookingService,
+    var date: Instant,
+    var time: Double,
+    var createdAt: Instant,
+    var updatedAt: Instant,
+)
+
+class BookingService(
+    var id: String,
     var providerId: String,
     var name: String,
     var description: String,
-    var date: Instant,
-    var time: Double,
+    var time: Long,
     var value: BigDecimal,
-    var status: String,
-    var createdAt: Instant? = null,
-    var updatedAt: Instant? = null,
+)
+
+class BookingUser(
+    var id: String,
+    var name: String,
+    var lastName: String,
+    var phone: String?,
 )
