@@ -15,4 +15,9 @@ MongoDB:
         pwd: "XaY2cMuXdJ4I7aJA",
         roles: [ { role: "readWrite", db: "schedule" } ]
     })
+    
+    db.bookings.createIndex(
+        { "service.providerId": 1, "date": 1, "time": 1 },
+        { unique: true, name: "unique" }
+    )
 ````

@@ -10,6 +10,7 @@ data class Booking(
     @Id
     var id: String?,
     var user: BookingUser,
+    var provider: BookingProvider,
     var service: BookingService,
     var date: Instant,
     var time: Double,
@@ -19,7 +20,6 @@ data class Booking(
 
 class BookingService(
     var id: String,
-    var providerId: String,
     var name: String,
     var description: String,
     var time: Long,
@@ -31,4 +31,9 @@ class BookingUser(
     var name: String,
     var lastName: String,
     var phone: String?,
+)
+
+class BookingProvider(
+    var id: String,
+    var name: String,
 )

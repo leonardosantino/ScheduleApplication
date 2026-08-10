@@ -1,27 +1,43 @@
 package com.application.model.dto.request
 
 import com.application.domain.entity.Booking
+import com.application.domain.entity.BookingProvider
 import com.application.domain.entity.BookingUser
 import java.math.BigDecimal
 import java.time.Instant
+import java.time.LocalDate
+import java.time.ZoneOffset
 import com.application.domain.entity.BookingService as BookingServiceEntity
 
 data class BookingRequest(
     var id: String?,
     var user: BookingUserRequest,
+    var provider: BookingProviderRequest,
     var service: BookingServiceRequest,
-    var date: Instant,
+    var date: LocalDate,
     var time: Double,
 ) {
     fun toCreate() =
         Booking(
             id = null,
             user = user.toBookingUser(),
+            provider = provider.toProvider(),
             service = service.toBookingService(),
-            date = date,
+            date = date.atStartOfDay(ZoneOffset.UTC).toInstant(),
             time = time,
             createdAt = Instant.now(),
             updatedAt = Instant.now(),
+        )
+}
+
+data class BookingProviderRequest(
+    var id: String,
+    var name: String,
+) {
+    fun toProvider() =
+        BookingProvider(
+            id = id,
+            name = name,
         )
 }
 
@@ -42,7 +58,6 @@ data class BookingUserRequest(
 
 data class BookingServiceRequest(
     var id: String,
-    var providerId: String,
     var name: String,
     var description: String,
     var time: Long,
@@ -51,7 +66,6 @@ data class BookingServiceRequest(
     fun toBookingService() =
         BookingServiceEntity(
             id = id,
-            providerId = providerId,
             name = name,
             description = description,
             time = time,

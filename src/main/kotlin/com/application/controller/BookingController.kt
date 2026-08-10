@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
+import java.time.LocalDate
 
 @RestController
 @RequestMapping("/bookings")
@@ -25,6 +26,12 @@ class BookingController(
     fun findAllByProviderId(
         @PathVariable id: String,
     ) = bookingService.findAllByProviderId(id).let { BookingListResponse.from(it) }
+
+    @GetMapping("/provider/{id}/date/{date}")
+    fun findAllByProviderIdAndDate(
+        @PathVariable id: String,
+        @PathVariable date: LocalDate,
+    ) = bookingService.findAllByProviderIdAndDate(id, date).let { BookingListResponse.from(it) }
 
     @GetMapping("/user/{id}")
     fun findAllByUserId(

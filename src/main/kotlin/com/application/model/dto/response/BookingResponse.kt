@@ -1,16 +1,20 @@
 package com.application.model.dto.response
 
 import com.application.domain.entity.Booking
+import com.application.domain.entity.BookingProvider
 import com.application.domain.entity.BookingUser
 import java.math.BigDecimal
 import java.time.Instant
+import java.time.LocalDate
+import java.time.ZoneOffset
 import com.application.domain.entity.BookingService as BookingServiceEntity
 
 data class BookingResponse(
     var id: String?,
     var user: BookingUserResponse,
+    var provider: BookingProviderResponse,
     var service: BookingServiceResponse,
-    var date: Instant,
+    var date: LocalDate,
     var time: Double,
     var createdAt: Instant,
     var updatedAt: Instant,
@@ -20,8 +24,9 @@ data class BookingResponse(
             BookingResponse(
                 id = booking.id,
                 user = BookingUserResponse.from(booking.user),
+                provider = BookingProviderResponse.from(booking.provider),
                 service = BookingServiceResponse.from(booking.service),
-                date = booking.date,
+                date = LocalDate.ofInstant(booking.date, ZoneOffset.UTC),
                 time = booking.time,
                 createdAt = booking.createdAt,
                 updatedAt = booking.updatedAt,
@@ -46,9 +51,21 @@ data class BookingUserResponse(
     }
 }
 
+data class BookingProviderResponse(
+    var id: String,
+    var name: String,
+) {
+    companion object {
+        fun from(provider: BookingProvider) =
+            BookingProviderResponse(
+                id = provider.id,
+                name = provider.name,
+            )
+    }
+}
+
 data class BookingServiceResponse(
     var id: String,
-    var providerId: String,
     var name: String,
     var description: String,
     var time: Long,
@@ -58,7 +75,6 @@ data class BookingServiceResponse(
         fun from(service: BookingServiceEntity) =
             BookingServiceResponse(
                 id = service.id,
-                providerId = service.providerId,
                 name = service.name,
                 description = service.description,
                 time = service.time,
