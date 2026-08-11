@@ -15,7 +15,7 @@ data class BookingResponse(
     var provider: BookingProviderResponse,
     var service: BookingServiceResponse,
     var date: LocalDate,
-    var time: Double,
+    var times: List<Double>,
     var createdAt: Instant,
     var updatedAt: Instant,
 ) {
@@ -27,7 +27,7 @@ data class BookingResponse(
                 provider = BookingProviderResponse.from(booking.provider),
                 service = BookingServiceResponse.from(booking.service),
                 date = LocalDate.ofInstant(booking.date, ZoneOffset.UTC),
-                time = booking.time,
+                times = booking.times,
                 createdAt = booking.createdAt,
                 updatedAt = booking.updatedAt,
             )

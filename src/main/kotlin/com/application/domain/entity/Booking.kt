@@ -13,7 +13,7 @@ data class Booking(
     var provider: BookingProvider,
     var service: BookingService,
     var date: Instant,
-    var time: Double,
+    var times: List<Double>,
     var createdAt: Instant,
     var updatedAt: Instant,
 )

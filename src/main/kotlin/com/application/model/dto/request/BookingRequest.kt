@@ -15,7 +15,7 @@ data class BookingRequest(
     var provider: BookingProviderRequest,
     var service: BookingServiceRequest,
     var date: LocalDate,
-    var time: Double,
+    var times: List<Double>,
 ) {
     fun toCreate() =
         Booking(
@@ -24,7 +24,7 @@ data class BookingRequest(
             provider = provider.toProvider(),
             service = service.toBookingService(),
             date = date.atStartOfDay(ZoneOffset.UTC).toInstant(),
-            time = time,
+            times = times,
             createdAt = Instant.now(),
             updatedAt = Instant.now(),
         )
