@@ -1,4 +1,4 @@
-package com.application.model.dto.response
+package com.application.controller.dto.response
 
 import com.application.domain.entity.User
 

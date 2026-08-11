@@ -1,5 +1,6 @@
 package com.application.domain.entity
 
+import com.application.domain.objects.AvailabilityDay
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 
@@ -8,13 +9,4 @@ class Availability(
     @Id
     var id: String?,
     var days: MutableMap<String, AvailabilityDay>?,
-)
-
-class AvailabilityDay(
-    var periods: MutableMap<Int, AvailabilityPeriod>?,
-)
-
-class AvailabilityPeriod(
-    var start: Int,
-    var end: Int,
 )

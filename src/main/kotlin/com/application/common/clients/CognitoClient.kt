@@ -1,8 +1,8 @@
 package com.application.common.clients
 
 import com.application.common.properties.AwsProperties
-import com.application.model.dto.request.UserRequest
-import com.application.model.dto.response.UserCreateResponse
+import com.application.controller.dto.request.UserRequest
+import com.application.controller.dto.response.UserCreateResponse
 import org.springframework.stereotype.Service
 import software.amazon.awssdk.services.cognitoidentityprovider.CognitoIdentityProviderClient
 import software.amazon.awssdk.services.cognitoidentityprovider.model.AdminCreateUserRequest

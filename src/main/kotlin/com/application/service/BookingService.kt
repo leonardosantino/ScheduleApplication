@@ -1,9 +1,9 @@
 package com.application.service
 
 import com.application.common.constants.ExMessage
+import com.application.controller.dto.request.BookingRequest
 import com.application.domain.entity.Booking
 import com.application.exception.BadRequestException
-import com.application.model.dto.request.BookingRequest
 import com.application.repository.BookingRepository
 import org.slf4j.LoggerFactory.getLogger
 import org.springframework.dao.DuplicateKeyException
@@ -22,7 +22,7 @@ class BookingService(
             bookingRepository.save(request.toCreate())
         } catch (ex: DuplicateKeyException) {
             log.error(ex.message)
-            throw BadRequestException(ExMessage.bookingTimeUnavailable)
+            throw BadRequestException(ExMessage.BOOKING_TIME_UNAVAILABLE)
         }
 
     fun findAllByProviderId(id: String): List<Booking> = bookingRepository.findAllByProviderId(id)

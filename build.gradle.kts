@@ -39,7 +39,7 @@ dependencies {
     testImplementation(kotlin("test"))
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
-    testImplementation("de.flapdoodle.embed:de.flapdoodle.embed.mongo:$flapdoodle")
+    testImplementation("de.flapdoodle.embed:de.flapdoodle.embed.mongo.spring4x:$flapdoodle")
 
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }

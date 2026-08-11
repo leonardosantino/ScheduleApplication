@@ -1,5 +1,5 @@
 package com.application.common.constants
 
 object ExMessage {
-    val bookingTimeUnavailable = "Horário não está mais disponível"
+    const val BOOKING_TIME_UNAVAILABLE = "Horário não está mais disponível"
 }

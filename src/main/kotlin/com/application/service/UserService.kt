@@ -1,8 +1,8 @@
 package com.application.service
 
+import com.application.controller.dto.request.UpdatePhoneRequest
+import com.application.controller.dto.request.UserRequest
 import com.application.domain.entity.User
-import com.application.model.dto.request.UpdatePhoneRequest
-import com.application.model.dto.request.UserRequest
 import com.application.repository.UserRepository
 import org.springframework.stereotype.Service
 

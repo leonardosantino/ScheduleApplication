@@ -1,7 +1,7 @@
 package com.application.controller
 
-import com.application.model.dto.request.ProviderRequest
-import com.application.model.dto.response.ProviderResponse
+import com.application.controller.dto.request.ProviderRequest
+import com.application.controller.dto.response.ProviderResponse
 import com.application.service.ProviderService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable

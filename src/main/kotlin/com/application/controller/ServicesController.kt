@@ -1,8 +1,8 @@
 package com.application.controller
 
-import com.application.model.dto.request.ServiceRequest
-import com.application.model.dto.response.ServiceListResponse
-import com.application.model.dto.response.ServiceResponse
+import com.application.controller.dto.request.ServiceRequest
+import com.application.controller.dto.response.ServiceListResponse
+import com.application.controller.dto.response.ServiceResponse
 import com.application.service.ServicesService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable

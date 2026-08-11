@@ -1,8 +1,8 @@
 package com.application.controller
 
-import com.application.model.dto.request.BookingRequest
-import com.application.model.dto.response.BookingListResponse
-import com.application.model.dto.response.BookingResponse
+import com.application.controller.dto.request.BookingRequest
+import com.application.controller.dto.response.BookingListResponse
+import com.application.controller.dto.response.BookingResponse
 import com.application.service.BookingService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable

@@ -1,7 +1,7 @@
 package com.application.service
 
+import com.application.controller.dto.request.AvailabilityRequest
 import com.application.domain.entity.Availability
-import com.application.model.dto.request.AvailabilityRequest
 import com.application.repository.AvailabilityRepository
 import org.springframework.stereotype.Service
 

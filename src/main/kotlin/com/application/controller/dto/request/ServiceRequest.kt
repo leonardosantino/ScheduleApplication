@@ -1,4 +1,4 @@
-package com.application.model.dto.request
+package com.application.controller.dto.request
 
 import com.application.domain.entity.Services
 import com.application.domain.objects.ServiceStatus

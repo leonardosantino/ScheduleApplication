@@ -1,4 +1,4 @@
-package com.application.model.dto.response
+package com.application.controller.dto.response
 
 import com.application.domain.entity.Services
 import java.math.BigDecimal
@@ -28,13 +28,5 @@ data class ServiceResponse(
                 createdAt = service.createdAt,
                 updatedAt = service.updatedAt,
             )
-    }
-}
-
-data class ServiceListResponse(
-    val items: List<ServiceResponse>,
-) {
-    companion object {
-        fun from(services: List<Services>) = ServiceListResponse(services.map { ServiceResponse.from(it) })
     }
 }

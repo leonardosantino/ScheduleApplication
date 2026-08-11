@@ -1,8 +1,8 @@
 package com.application.controller
 
-import com.application.model.dto.request.UpdatePhoneRequest
-import com.application.model.dto.request.UserRequest
-import com.application.model.dto.response.UserResponse
+import com.application.controller.dto.request.UpdatePhoneRequest
+import com.application.controller.dto.request.UserRequest
+import com.application.controller.dto.response.UserResponse
 import com.application.service.UserService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping

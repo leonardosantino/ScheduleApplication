@@ -1,7 +1,7 @@
 package com.application.controller
 
-import com.application.model.dto.request.AvailabilityRequest
-import com.application.model.dto.response.AvailabilityResponse
+import com.application.controller.dto.request.AvailabilityRequest
+import com.application.controller.dto.response.AvailabilityResponse
 import com.application.service.AvailabilityService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable

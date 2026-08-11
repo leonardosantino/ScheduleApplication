@@ -1,7 +1,7 @@
 package com.application.service
 
+import com.application.controller.dto.request.ServiceRequest
 import com.application.domain.entity.Services
-import com.application.model.dto.request.ServiceRequest
 import com.application.repository.ServicesRepository
 import org.springframework.stereotype.Service
 

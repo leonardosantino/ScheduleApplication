@@ -1,4 +1,4 @@
-package com.application.model.dto.response
+package com.application.controller.dto.response
 
 data class UserCreateResponse(
     val id: String,
