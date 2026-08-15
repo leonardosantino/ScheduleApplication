@@ -7,6 +7,7 @@ Spring boot Run:
 ```
 
 MongoDB:
+
 ```shell
     db.getUsers()
     
@@ -19,6 +20,11 @@ MongoDB:
     db.bookings.createIndex(
         { "provider._id": 1, "date": 1, "times": 1 },
         { name: "unique_provider_date_times", unique: true }
+    )
+      
+    db.providers.createIndex(
+        { slug: 1 },
+        { name: "unique_slug", unique: true }
     )
 ````
 

@@ -7,6 +7,6 @@ import org.springframework.data.mongodb.core.mapping.Document
 @Document(collection = "availabilities")
 class Availability(
     @Id
-    var id: String?,
-    var days: MutableMap<String, AvailabilityDay>?,
+    var id: String,
+    var days: MutableMap<String, AvailabilityDay>,
 )

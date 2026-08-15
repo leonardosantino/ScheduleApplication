@@ -20,8 +20,8 @@ class AvailabilityController(
         @RequestBody request: AvailabilityRequest,
     ) = availabilityService.save(request).let { AvailabilityResponse.from(it) }
 
-    @GetMapping("/{id}")
-    fun findById(
+    @GetMapping("/provider/{id}")
+    fun findByProviderId(
         @PathVariable id: String,
-    ) = availabilityService.findById(id).map { AvailabilityResponse.from(it) }
+    ) = availabilityService.findByProviderId(id).let { AvailabilityResponse.from(it) }
 }

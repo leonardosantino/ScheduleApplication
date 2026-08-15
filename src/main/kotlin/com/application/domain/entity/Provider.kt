@@ -7,7 +7,7 @@ import java.time.Instant
 @Document(collection = "providers")
 class Provider(
     @Id
-    var id: String?,
+    var id: String,
     var slug: String,
     var name: String,
     var description: String,
