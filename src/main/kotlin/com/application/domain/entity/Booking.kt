@@ -15,7 +15,7 @@ data class Booking(
     var provider: BookingProvider,
     var service: BookingService,
     var date: Instant,
-    var times: List<Double>,
+    var times: List<Int>,
     var createdAt: Instant,
     var updatedAt: Instant,
 )

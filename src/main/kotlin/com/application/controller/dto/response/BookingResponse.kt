@@ -11,7 +11,7 @@ data class BookingResponse(
     var provider: BookingProviderResponse,
     var service: BookingServiceResponse,
     var date: LocalDate,
-    var times: List<Double>,
+    var times: List<Int>,
     var createdAt: Instant,
     var updatedAt: Instant,
 ) {

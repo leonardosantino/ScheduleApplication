@@ -11,7 +11,7 @@ data class BookingRequest(
     var provider: BookingProviderRequest,
     var service: BookingServiceRequest,
     var date: LocalDate,
-    var times: List<Double>,
+    var times: List<Int>,
 ) {
     fun toCreate() =
         Booking(
