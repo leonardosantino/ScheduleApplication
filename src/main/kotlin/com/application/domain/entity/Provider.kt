@@ -12,6 +12,7 @@ class Provider(
     var name: String,
     var description: String,
     var role: String,
+    var phone: String,
     var status: String,
     var createdAt: Instant,
     var updatedAt: Instant,

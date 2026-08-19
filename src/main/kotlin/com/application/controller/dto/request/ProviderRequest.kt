@@ -11,6 +11,7 @@ data class ProviderRequest(
     var name: String,
     var role: String,
     var description: String,
+    var phone: String,
 ) {
     fun toCreate(): Provider =
         Provider(
@@ -24,6 +25,7 @@ data class ProviderRequest(
             name = name,
             role = role,
             description = description,
+            phone = phone,
             status = UserStatus.ENABLED.value,
             createdAt = Instant.now(),
             updatedAt = Instant.now(),
@@ -33,6 +35,9 @@ data class ProviderRequest(
         provider.name = name
         provider.role = role
         provider.description = description
+        provider.phone = phone
+
+        provider.updatedAt = Instant.now()
 
         return provider
     }
