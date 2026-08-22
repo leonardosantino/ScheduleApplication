@@ -12,7 +12,7 @@ data class ServiceRequest(
     var description: String,
     var time: Long,
     var value: BigDecimal,
-    var status: String?,
+    var status: String,
     var createdAt: Instant?,
     var updatedAt: Instant?,
 ) {
@@ -28,4 +28,16 @@ data class ServiceRequest(
             createdAt = Instant.now(),
             updatedAt = Instant.now(),
         )
+
+    fun toUpdate(service: Services): Services {
+        service.name = name
+        service.description = description
+        service.time = time
+        service.value = value
+        service.status = status
+
+        service.updatedAt = Instant.now()
+
+        return service
+    }
 }
