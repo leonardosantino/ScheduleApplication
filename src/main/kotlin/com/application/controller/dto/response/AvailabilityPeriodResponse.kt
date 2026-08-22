@@ -1,16 +1,12 @@
 package com.application.controller.dto.response
 
 import com.application.domain.objects.AvailabilityPeriod
+import com.application.domain.objects.AvailabilityPeriodTime
 
 data class AvailabilityPeriodResponse(
-    var start: Int,
-    var end: Int,
+    var time: AvailabilityPeriodTime,
 ) {
     companion object {
-        fun from(period: AvailabilityPeriod) =
-            AvailabilityPeriodResponse(
-                start = period.start,
-                end = period.end,
-            )
+        fun from(period: AvailabilityPeriod) = AvailabilityPeriodResponse(period.time)
     }
 }

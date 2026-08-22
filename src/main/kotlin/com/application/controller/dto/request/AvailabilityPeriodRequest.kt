@@ -1,14 +1,13 @@
 package com.application.controller.dto.request
 
 import com.application.domain.objects.AvailabilityPeriod
+import com.application.domain.objects.AvailabilityPeriodTime
 
 class AvailabilityPeriodRequest(
-    var start: Int,
-    var end: Int,
+    var time: AvailabilityPeriodTime,
 ) {
     fun toAvailabilityPeriod() =
         AvailabilityPeriod(
-            start = start,
-            end = end,
+            time = time,
         )
 }
