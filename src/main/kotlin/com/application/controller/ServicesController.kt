@@ -33,6 +33,12 @@ class ServicesController(
         @PathVariable id: String,
     ) = servicesService.findAllByProviderId(id).let { ServiceListResponse.from(it) }
 
+    @GetMapping("/provider/{id}/status/{status}")
+    fun findAllByProviderIdAndStatus(
+        @PathVariable id: String,
+        @PathVariable status: String,
+    ) = servicesService.findAllByProviderIdAndStatus(id, status).let { ServiceListResponse.from(it) }
+
     @DeleteMapping("/{id}")
     fun deleteById(
         @PathVariable id: String,

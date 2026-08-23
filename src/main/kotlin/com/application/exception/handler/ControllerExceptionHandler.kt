@@ -4,10 +4,10 @@ import com.application.exception.BadRequestException
 import com.application.exception.ForbiddenException
 import com.application.exception.NotFoundException
 import com.application.exception.UnauthorizedException
-import org.springframework.http.HttpStatus
 import org.springframework.http.HttpStatus.BAD_REQUEST
 import org.springframework.http.HttpStatus.FORBIDDEN
 import org.springframework.http.HttpStatus.NOT_FOUND
+import org.springframework.http.HttpStatus.UNAUTHORIZED
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
@@ -31,6 +31,6 @@ class ControllerExceptionHandler {
     fun handleUnauthorizedException(ex: UnauthorizedException) =
         ResponseEntity(
             ExceptionResponse(ex.message),
-            HttpStatus.UNAUTHORIZED,
+            UNAUTHORIZED,
         )
 }

@@ -1,6 +1,8 @@
 package com.application.service
 
+import com.application.common.constants.ExMessage
 import com.application.controller.dto.request.ProviderRequest
+import com.application.exception.NotFoundException
 import com.application.repository.ProviderRepository
 import org.springframework.stereotype.Service
 
@@ -12,5 +14,8 @@ class ProviderService(
 
     fun findById(id: String) = providerRepository.findById(id)
 
-    fun findBySlug(slug: String) = providerRepository.findBySlug(slug)
+    fun findBySlug(slug: String) =
+        providerRepository
+            .findBySlug(slug)
+            .orElseThrow { NotFoundException(ExMessage.ANNOUNCEMENT_NOT_FOUND) }
 }

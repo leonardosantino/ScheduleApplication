@@ -24,5 +24,10 @@ class ServicesService(
 
     fun findAllByProviderId(id: String): List<Services> = servicesRepository.findAllByProviderId(id)
 
+    fun findAllByProviderIdAndStatus(
+        id: String,
+        status: String,
+    ): List<Services> = servicesRepository.findAllByProviderIdAndStatus(id, status)
+
     fun deleteById(id: String) = servicesRepository.deleteById(id)
 }

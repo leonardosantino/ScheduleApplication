@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory.getLogger
 import org.springframework.dao.DuplicateKeyException
 import org.springframework.stereotype.Service
 import java.time.LocalDate
-import java.time.ZoneOffset
 
 @Service
 class BookingService(
@@ -32,9 +31,5 @@ class BookingService(
     fun findAllByProviderIdAndDate(
         providerId: String,
         date: LocalDate,
-    ): List<Booking> {
-        val instant = date.atStartOfDay(ZoneOffset.UTC).toInstant()
-
-        return bookingRepository.findAllByProviderIdAndDate(providerId, instant)
-    }
+    ): List<Booking> = bookingRepository.findAllByProviderIdAndDate(providerId, date.toString())
 }

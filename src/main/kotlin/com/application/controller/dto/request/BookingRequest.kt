@@ -3,7 +3,6 @@ package com.application.controller.dto.request
 import com.application.domain.entity.Booking
 import java.time.Instant
 import java.time.LocalDate
-import java.time.ZoneOffset
 
 data class BookingRequest(
     var id: String?,
@@ -19,7 +18,8 @@ data class BookingRequest(
             user = user.toBookingUser(),
             provider = provider.toProvider(),
             service = service.toBookingService(),
-            date = date.atStartOfDay(ZoneOffset.UTC).toInstant(),
+            date = date.toString(),
+            time = times.first(),
             times = times,
             createdAt = Instant.now(),
             updatedAt = Instant.now(),

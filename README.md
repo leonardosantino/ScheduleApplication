@@ -18,8 +18,8 @@ MongoDB:
     })
     
     db.bookings.createIndex(
-        { "provider._id": 1, "date": 1, "times": 1 },
-        { name: "unique_provider_date_times", unique: true }
+        { "provider._id": 1, "date": 1, "time": 1 },
+        { name: "unique_provider_date_time", unique: true }
     )
       
     db.providers.createIndex(
