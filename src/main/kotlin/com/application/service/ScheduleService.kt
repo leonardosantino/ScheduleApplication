@@ -13,5 +13,5 @@ class ScheduleService(
 ) {
     fun save(request: ScheduleRequest): Schedule = scheduleRepository.save(request.toSchedule())
 
-    fun findByProviderId(id: String) = scheduleRepository.findById(id).orElseThrow { NotFoundException(ExMessage.SCHEDULE_NOT_FOUND) }
+    fun findByAnnouncementId(id: String) = scheduleRepository.findById(id).orElseThrow { NotFoundException(ExMessage.SCHEDULE_NOT_FOUND) }
 }

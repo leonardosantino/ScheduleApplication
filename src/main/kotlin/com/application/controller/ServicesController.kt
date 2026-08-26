@@ -1,8 +1,8 @@
 package com.application.controller
 
 import com.application.controller.dto.request.ServiceRequest
-import com.application.controller.dto.response.ServiceListResponse
 import com.application.controller.dto.response.ServiceResponse
+import com.application.controller.dto.response.ServicesResponse
 import com.application.service.ServicesService
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
@@ -28,16 +28,16 @@ class ServicesController(
         @RequestBody request: ServiceRequest,
     ) = servicesService.update(request).let { ServiceResponse.from(it) }
 
-    @GetMapping("/provider/{id}")
-    fun findAllByProviderId(
+    @GetMapping("/announcement/{id}")
+    fun findAllByAnnouncementId(
         @PathVariable id: String,
-    ) = servicesService.findAllByProviderId(id).let { ServiceListResponse.from(it) }
+    ) = servicesService.findAllByAnnouncementId(id).let { ServicesResponse.from(it) }
 
-    @GetMapping("/provider/{id}/status/{status}")
-    fun findAllByProviderIdAndStatus(
+    @GetMapping("/announcement/{id}/status/{status}")
+    fun findAllByAnnouncementIdAndStatus(
         @PathVariable id: String,
         @PathVariable status: String,
-    ) = servicesService.findAllByProviderIdAndStatus(id, status).let { ServiceListResponse.from(it) }
+    ) = servicesService.findAllByAnnouncementIdAndStatus(id, status).let { ServicesResponse.from(it) }
 
     @DeleteMapping("/{id}")
     fun deleteById(

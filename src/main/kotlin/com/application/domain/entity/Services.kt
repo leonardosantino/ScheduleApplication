@@ -9,7 +9,7 @@ import java.time.Instant
 class Services(
     @Id
     var id: String?,
-    var provider: ServiceProvider,
+    var announcement: ServiceAnnouncement,
     var name: String,
     var description: String,
     var time: Long,
@@ -19,6 +19,6 @@ class Services(
     var updatedAt: Instant,
 )
 
-data class ServiceProvider(
+data class ServiceAnnouncement(
     var id: String,
 )

@@ -7,7 +7,7 @@ import java.time.LocalDate
 data class AppointmentRequest(
     var id: String?,
     var user: AppointmentUserRequest,
-    var provider: AppointmentProviderRequest,
+    var announcement: AppointmentAnnouncementRequest,
     var service: AppointmentServiceRequest,
     var date: LocalDate,
     var times: List<Int>,
@@ -16,7 +16,7 @@ data class AppointmentRequest(
         Appointment(
             id = null,
             user = user.toUser(),
-            provider = provider.toProvider(),
+            announcement = announcement.toAnnouncement(),
             service = service.toService(),
             date = date.toString(),
             time = times.first(),

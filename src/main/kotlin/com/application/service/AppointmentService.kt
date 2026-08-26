@@ -24,12 +24,12 @@ class AppointmentService(
             throw BadRequestException(ExMessage.APPOINTMENT_TIME_UNAVAILABLE)
         }
 
-    fun findAllByProviderId(id: String): List<Appointment> = appointmentRepository.findAllByProviderId(id)
+    fun findAllByAnnouncementId(id: String): List<Appointment> = appointmentRepository.findAllByAnnouncementId(id)
 
     fun findAllByUserId(id: String): List<Appointment> = appointmentRepository.findAllByUserId(id)
 
-    fun findAllByProviderIdAndDate(
-        providerId: String,
+    fun findAllByAnnouncementIdAndDate(
+        id: String,
         date: LocalDate,
-    ): List<Appointment> = appointmentRepository.findAllByProviderIdAndDate(providerId, date.toString())
+    ): List<Appointment> = appointmentRepository.findAllByAnnouncementIdAndDate(id, date.toString())
 }

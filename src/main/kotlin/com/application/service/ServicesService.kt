@@ -22,12 +22,12 @@ class ServicesService(
         return servicesRepository.save(request.toUpdate(service))
     }
 
-    fun findAllByProviderId(id: String): List<Services> = servicesRepository.findAllByProviderId(id)
+    fun findAllByAnnouncementId(id: String): List<Services> = servicesRepository.findAllByAnnouncementId(id)
 
-    fun findAllByProviderIdAndStatus(
+    fun findAllByAnnouncementIdAndStatus(
         id: String,
         status: String,
-    ): List<Services> = servicesRepository.findAllByProviderIdAndStatus(id, status)
+    ): List<Services> = servicesRepository.findAllByAnnouncementIdAndStatus(id, status)
 
     fun deleteById(id: String) = servicesRepository.deleteById(id)
 }

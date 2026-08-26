@@ -1,6 +1,6 @@
 package com.application.domain.objects
 
-class AppointmentProvider(
+class AppointmentAnnouncement(
     var id: String,
     var name: String,
     var phone: String,

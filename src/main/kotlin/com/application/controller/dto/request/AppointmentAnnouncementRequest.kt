@@ -1,14 +1,14 @@
 package com.application.controller.dto.request
 
-import com.application.domain.objects.AppointmentProvider
+import com.application.domain.objects.AppointmentAnnouncement
 
-data class AppointmentProviderRequest(
+data class AppointmentAnnouncementRequest(
     var id: String,
     var name: String,
     var phone: String,
 ) {
-    fun toProvider() =
-        AppointmentProvider(
+    fun toAnnouncement() =
+        AppointmentAnnouncement(
             id = id,
             name = name,
             phone = phone,

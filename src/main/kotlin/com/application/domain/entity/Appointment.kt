@@ -1,6 +1,6 @@
 package com.application.domain.entity
 
-import com.application.domain.objects.AppointmentProvider
+import com.application.domain.objects.AppointmentAnnouncement
 import com.application.domain.objects.AppointmentService
 import com.application.domain.objects.AppointmentUser
 import org.springframework.data.annotation.Id
@@ -12,7 +12,7 @@ data class Appointment(
     @Id
     var id: String?,
     var user: AppointmentUser,
-    var provider: AppointmentProvider,
+    var announcement: AppointmentAnnouncement,
     var service: AppointmentService,
     var date: String,
     var time: Int,

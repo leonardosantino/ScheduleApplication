@@ -6,7 +6,7 @@ import java.time.Instant
 data class AppointmentResponse(
     var id: String?,
     var user: AppointmentUserResponse,
-    var provider: AppointmentProviderResponse,
+    var announcement: AppointmentAnnouncementResponse,
     var service: AppointmentServiceResponse,
     var date: String,
     var time: Int,
@@ -19,7 +19,7 @@ data class AppointmentResponse(
             AppointmentResponse(
                 id = appointment.id,
                 user = AppointmentUserResponse.from(appointment.user),
-                provider = AppointmentProviderResponse.from(appointment.provider),
+                announcement = AppointmentAnnouncementResponse.from(appointment.announcement),
                 service = AppointmentServiceResponse.from(appointment.service),
                 date = appointment.date,
                 time = appointment.time,

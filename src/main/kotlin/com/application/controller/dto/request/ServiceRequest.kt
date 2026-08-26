@@ -1,6 +1,6 @@
 package com.application.controller.dto.request
 
-import com.application.domain.entity.ServiceProvider
+import com.application.domain.entity.ServiceAnnouncement
 import com.application.domain.entity.Services
 import com.application.domain.objects.ServiceStatus
 import java.math.BigDecimal
@@ -8,7 +8,7 @@ import java.time.Instant
 
 data class ServiceRequest(
     var id: String?,
-    var provider: ServiceProvider,
+    var announcement: ServiceAnnouncement,
     var name: String,
     var description: String,
     var time: Long,
@@ -20,7 +20,7 @@ data class ServiceRequest(
     fun toCreate() =
         Services(
             id = null,
-            provider = provider,
+            announcement = announcement,
             name = name,
             description = description,
             time = time,

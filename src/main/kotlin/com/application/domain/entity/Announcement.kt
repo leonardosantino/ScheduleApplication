@@ -4,14 +4,14 @@ import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 import java.time.Instant
 
-@Document(collection = "providers")
-class Provider(
+@Document(collection = "announcements")
+class Announcement(
     @Id
     var id: String,
     var slug: String,
     var name: String,
     var description: String,
-    var role: String,
+    var category: String,
     var phone: String,
     var status: String,
     var createdAt: Instant,

@@ -6,9 +6,9 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface ServicesRepository : MongoRepository<Services, String> {
-    fun findAllByProviderId(id: String): List<Services>
+    fun findAllByAnnouncementId(id: String): List<Services>
 
-    fun findAllByProviderIdAndStatus(
+    fun findAllByAnnouncementIdAndStatus(
         id: String,
         status: String,
     ): List<Services>

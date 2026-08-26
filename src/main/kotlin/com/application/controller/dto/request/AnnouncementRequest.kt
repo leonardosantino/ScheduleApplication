@@ -1,29 +1,29 @@
 package com.application.controller.dto.request
 
-import com.application.domain.entity.Provider
+import com.application.domain.entity.Announcement
 import com.application.domain.objects.UserStatus
 import java.text.Normalizer
 import java.text.Normalizer.normalize
 import java.time.Instant
 
-data class ProviderRequest(
+data class AnnouncementRequest(
     var id: String,
     var name: String,
-    var role: String,
+    var category: String,
     var description: String,
     var phone: String,
 ) {
-    fun toCreate(): Provider =
-        Provider(
+    fun toCreate(): Announcement =
+        Announcement(
             id = id,
             slug =
                 name.lowercase().let {
                     normalize(it, Normalizer.Form.NFD)
                         .replace(Regex("\\p{InCombiningDiacriticalMarks}+"), "")
-                        .replace(" ", "")
+                        .replace(Regex("[^\\p{L}\\p{N}]"), "")
                 },
             name = name,
-            role = role,
+            category = category,
             description = description,
             phone = phone,
             status = UserStatus.ENABLED.value,
@@ -31,14 +31,14 @@ data class ProviderRequest(
             updatedAt = Instant.now(),
         )
 
-    fun toUpdate(provider: Provider): Provider {
-        provider.name = name
-        provider.role = role
-        provider.description = description
-        provider.phone = phone
+    fun toUpdate(announcement: Announcement): Announcement {
+        announcement.name = name
+        announcement.category = category
+        announcement.description = description
+        announcement.phone = phone
 
-        provider.updatedAt = Instant.now()
+        announcement.updatedAt = Instant.now()
 
-        return provider
+        return announcement
     }
 }
