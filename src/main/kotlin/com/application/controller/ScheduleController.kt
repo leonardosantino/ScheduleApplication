@@ -1,8 +1,8 @@
 package com.application.controller
 
-import com.application.controller.dto.request.AvailabilityRequest
-import com.application.controller.dto.response.AvailabilityResponse
-import com.application.service.AvailabilityService
+import com.application.controller.dto.request.ScheduleRequest
+import com.application.controller.dto.response.ScheduleResponse
+import com.application.service.ScheduleService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -11,17 +11,17 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/availabilities")
-class AvailabilityController(
-    private val availabilityService: AvailabilityService,
+@RequestMapping("/schedule")
+class ScheduleController(
+    private val scheduleService: ScheduleService,
 ) {
     @PostMapping
     fun save(
-        @RequestBody request: AvailabilityRequest,
-    ) = availabilityService.save(request).let { AvailabilityResponse.from(it) }
+        @RequestBody request: ScheduleRequest,
+    ) = scheduleService.save(request).let { ScheduleResponse.from(it) }
 
     @GetMapping("/provider/{id}")
     fun findByProviderId(
         @PathVariable id: String,
-    ) = availabilityService.findByProviderId(id).let { AvailabilityResponse.from(it) }
+    ) = scheduleService.findByProviderId(id).let { ScheduleResponse.from(it) }
 }

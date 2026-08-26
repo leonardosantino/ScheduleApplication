@@ -1,9 +1,9 @@
 package com.application.controller
 
-import com.application.controller.dto.request.BookingRequest
-import com.application.controller.dto.response.BookingListResponse
-import com.application.controller.dto.response.BookingResponse
-import com.application.service.BookingService
+import com.application.controller.dto.request.AppointmentRequest
+import com.application.controller.dto.response.AppointmentResponse
+import com.application.controller.dto.response.AppointmentsResponse
+import com.application.service.AppointmentService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -13,28 +13,28 @@ import org.springframework.web.bind.annotation.RestController
 import java.time.LocalDate
 
 @RestController
-@RequestMapping("/bookings")
-class BookingController(
-    private val bookingService: BookingService,
+@RequestMapping("/appointments")
+class AppointmentController(
+    private val appointmentService: AppointmentService,
 ) {
     @PostMapping
     fun save(
-        @RequestBody request: BookingRequest,
-    ) = bookingService.save(request).let { BookingResponse.from(it) }
+        @RequestBody request: AppointmentRequest,
+    ) = appointmentService.save(request).let { AppointmentResponse.from(it) }
 
     @GetMapping("/provider/{id}")
     fun findAllByProviderId(
         @PathVariable id: String,
-    ) = bookingService.findAllByProviderId(id).let { BookingListResponse.from(it) }
+    ) = appointmentService.findAllByProviderId(id).let { AppointmentsResponse.from(it) }
 
     @GetMapping("/provider/{id}/date/{date}")
     fun findAllByProviderIdAndDate(
         @PathVariable id: String,
         @PathVariable date: LocalDate,
-    ) = bookingService.findAllByProviderIdAndDate(id, date).let { BookingListResponse.from(it) }
+    ) = appointmentService.findAllByProviderIdAndDate(id, date).let { AppointmentsResponse.from(it) }
 
     @GetMapping("/user/{id}")
     fun findAllByUserId(
         @PathVariable id: String,
-    ) = bookingService.findAllByUserId(id).let { BookingListResponse.from(it) }
+    ) = appointmentService.findAllByUserId(id).let { AppointmentsResponse.from(it) }
 }

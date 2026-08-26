@@ -2,7 +2,7 @@ package com.application.domain.objects
 
 import java.math.BigDecimal
 
-class BookingService(
+class AppointmentService(
     var id: String,
     var name: String,
     var description: String,

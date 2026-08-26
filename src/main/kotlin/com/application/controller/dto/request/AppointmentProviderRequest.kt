@@ -1,14 +1,14 @@
 package com.application.controller.dto.request
 
-import com.application.domain.objects.BookingProvider
+import com.application.domain.objects.AppointmentProvider
 
-data class BookingProviderRequest(
+data class AppointmentProviderRequest(
     var id: String,
     var name: String,
     var phone: String,
 ) {
     fun toProvider() =
-        BookingProvider(
+        AppointmentProvider(
             id = id,
             name = name,
             phone = phone,

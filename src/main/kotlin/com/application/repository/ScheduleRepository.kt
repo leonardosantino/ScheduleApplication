@@ -1,8 +1,8 @@
 package com.application.repository
 
-import com.application.domain.entity.Availability
+import com.application.domain.entity.Schedule
 import org.springframework.data.mongodb.repository.MongoRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface AvailabilityRepository : MongoRepository<Availability, String>
+interface ScheduleRepository : MongoRepository<Schedule, String>

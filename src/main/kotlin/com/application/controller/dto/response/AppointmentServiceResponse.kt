@@ -1,9 +1,9 @@
 package com.application.controller.dto.response
 
-import com.application.domain.objects.BookingService
+import com.application.domain.objects.AppointmentService
 import java.math.BigDecimal
 
-data class BookingServiceResponse(
+data class AppointmentServiceResponse(
     var id: String,
     var name: String,
     var description: String,
@@ -11,8 +11,8 @@ data class BookingServiceResponse(
     var value: BigDecimal,
 ) {
     companion object {
-        fun from(service: BookingService) =
-            BookingServiceResponse(
+        fun from(service: AppointmentService) =
+            AppointmentServiceResponse(
                 id = service.id,
                 name = service.name,
                 description = service.description,

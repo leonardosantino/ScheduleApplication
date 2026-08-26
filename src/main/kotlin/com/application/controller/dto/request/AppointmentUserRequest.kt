@@ -1,15 +1,15 @@
 package com.application.controller.dto.request
 
-import com.application.domain.objects.BookingUser
+import com.application.domain.objects.AppointmentUser
 
-data class BookingUserRequest(
+data class AppointmentUserRequest(
     var id: String,
     var name: String,
     var lastName: String,
     var phone: String?,
 ) {
-    fun toBookingUser() =
-        BookingUser(
+    fun toUser() =
+        AppointmentUser(
             id = id,
             name = name,
             lastName = lastName,
