@@ -17,9 +17,9 @@ MongoDB:
         roles: [ { role: "readWrite", db: "schedule" } ]
     })
     
-    db.bookings.createIndex(
-        { "provider._id": 1, "date": 1, "time": 1 },
-        { name: "unique_provider_date_time", unique: true }
+    db.appointments.createIndex(
+        { "announcement._id": 1, "date": 1, "time": 1 },
+        { name: "unique_appointment_date_time", unique: true }
     )
       
     db.providers.createIndex(

@@ -6,7 +6,7 @@ data class AppointmentUserRequest(
     var id: String,
     var name: String,
     var lastName: String,
-    var phone: String?,
+    var phone: String,
 ) {
     fun toUser() =
         AppointmentUser(
