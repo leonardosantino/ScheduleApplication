@@ -9,7 +9,7 @@ services:
       - schedule_database
     environment:
       # SPRING
-      SPRING_PROFILES_ACTIVE: dev
+      SPRING_PROFILES_ACTIVE: production
       SPRING_MONGODB_URI: mongodb://schedule:XaY2cMuXdJ4I7aJA@schedule_database:27017/schedule
       # AWS
       AWS_REGION: us-east-1
@@ -24,7 +24,7 @@ services:
     ports:
       - "27017:27017"
     environment:
-      # MONGO_INITDB_DATABASE: schedule
+      MONGO_INITDB_DATABASE: schedule
       MONGO_INITDB_ROOT_USERNAME: local
       MONGO_INITDB_ROOT_PASSWORD: XaY2cMuXdJ4I7aJA
 

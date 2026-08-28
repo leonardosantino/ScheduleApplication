@@ -1,0 +1,7 @@
+spring:
+  mongodb:
+    uri: mongodb://schedule:Dg2uVAB1NkztLxuk@schedule_database:27017/schedule
+
+aws:
+  cognito:
+    userPoolId: us-east-1_Z6Cv18dod

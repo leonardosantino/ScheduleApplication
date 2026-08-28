@@ -4,4 +4,4 @@ spring:
 
 aws:
   cognito:
-    userPoolId: us-east-1_0zpeIuMMO
+    userPoolId: us-east-1_Z6Cv18dod
