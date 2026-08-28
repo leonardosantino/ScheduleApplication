@@ -1,21 +1,21 @@
 services:
-  schedule_application:
-    container_name: schedule_application
-    image: leonardosantino/schedule_application:0.0.1
-    restart: unless-stopped
-    ports:
-      - "8080:8080"
-    depends_on:
-      - schedule_database
-    environment:
-      # SPRING
-      SPRING_PROFILES_ACTIVE: production
-      SPRING_MONGODB_URI: mongodb://schedule:XaY2cMuXdJ4I7aJA@schedule_database:27017/schedule
-      # AWS
-      AWS_REGION: us-east-1
-      AWS_ACCESS_KEY_ID:
-      AWS_SECRET_ACCESS_KEY:
-      AWS_SESSION_TOKEN:
+#  schedule_application:
+#    container_name: schedule_application
+#    image: leonardosantino/schedule_application:0.0.1
+#    restart: unless-stopped
+#    ports:
+#      - "8080:8080"
+#    depends_on:
+#      - schedule_database
+#    environment:
+#      # SPRING
+#      SPRING_PROFILES_ACTIVE: production
+#      SPRING_MONGODB_URI: mongodb://schedule:XaY2cMuXdJ4I7aJA@schedule_database:27017/schedule
+#      # AWS
+#      AWS_REGION: us-east-1
+#      AWS_ACCESS_KEY_ID:
+#      AWS_SECRET_ACCESS_KEY:
+#      AWS_SESSION_TOKEN:
 
   schedule_database:
     container_name: schedule_database
@@ -27,6 +27,12 @@ services:
       MONGO_INITDB_DATABASE: schedule
       MONGO_INITDB_ROOT_USERNAME: local
       MONGO_INITDB_ROOT_PASSWORD: XaY2cMuXdJ4I7aJA
+    volumes:
+      - schedule_database_data:/data/db
+
+volumes:
+  schedule_database_data:
+    name: schedule_database_data
 
 networks:
   default:
