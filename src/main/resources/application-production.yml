@@ -1,6 +1,6 @@
 spring:
   mongodb:
-    uri: mongodb://schedule:Dg2uVAB1NkztLxuk@schedule_database:27017/schedule
+    uri: mongodb://schedule:Dg2uVAB1NkztLxuk@scheduledatabase:27017/schedule
 
 aws:
   cognito:
