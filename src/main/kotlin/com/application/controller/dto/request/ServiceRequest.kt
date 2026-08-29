@@ -1,7 +1,7 @@
 package com.application.controller.dto.request
 
-import com.application.domain.entity.ServiceAnnouncement
 import com.application.domain.entity.Services
+import com.application.domain.objects.ServiceAnnouncement
 import com.application.domain.objects.ServiceStatus
 import java.math.BigDecimal
 import java.time.Instant
@@ -11,7 +11,7 @@ data class ServiceRequest(
     var announcement: ServiceAnnouncement,
     var name: String,
     var description: String,
-    var time: Long,
+    var time: Int,
     var value: BigDecimal,
     var status: String,
     var createdAt: Instant?,

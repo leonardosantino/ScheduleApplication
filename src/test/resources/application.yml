@@ -2,6 +2,10 @@ spring:
   application:
     name: schedule
 
+aws:
+  cognito:
+    userPoolId: us-east-1_Z6Cv18dod
+
 de:
   flapdoodle:
     mongodb:

@@ -22,7 +22,7 @@ MongoDB:
         { name: "unique_appointment_date_time", unique: true }
     )
       
-    db.providers.createIndex(
+    db.announcements.createIndex(
         { slug: 1 },
         { name: "unique_slug", unique: true }
     )

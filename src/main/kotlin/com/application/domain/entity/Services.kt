@@ -1,5 +1,6 @@
 package com.application.domain.entity
 
+import com.application.domain.objects.ServiceAnnouncement
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 import java.math.BigDecimal
@@ -12,13 +13,9 @@ class Services(
     var announcement: ServiceAnnouncement,
     var name: String,
     var description: String,
-    var time: Long,
+    var time: Int,
     var value: BigDecimal,
     var status: String,
     var createdAt: Instant,
     var updatedAt: Instant,
-)
-
-data class ServiceAnnouncement(
-    var id: String,
 )
