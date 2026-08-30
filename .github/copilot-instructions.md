@@ -7,7 +7,7 @@ This is a Spring Boot application.
 Java: 21
 Kotlin: 2.2.21
 Spring boot: 4.0.1
-PostgreSQL: 18
+MongoDB: 8
 
 kotlin.plugin.spring.version: 2.2.21
 

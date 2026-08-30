@@ -6,6 +6,7 @@ import com.application.service.AnnouncementService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -17,6 +18,11 @@ class AnnouncementController(
 ) {
     @PostMapping
     fun save(
+        @RequestBody request: AnnouncementRequest,
+    ) = announcementService.save(request).let { AnnouncementResponse.from(it) }
+
+    @PutMapping
+    fun update(
         @RequestBody request: AnnouncementRequest,
     ) = announcementService.update(request).let { AnnouncementResponse.from(it) }
 

@@ -26,7 +26,7 @@ data class AnnouncementRequest(
             category = category,
             description = description,
             phone = phone,
-            status = UserStatus.ENABLED.value,
+            status = UserStatus.DISABLED.value,
             createdAt = Instant.now(),
             updatedAt = Instant.now(),
         )

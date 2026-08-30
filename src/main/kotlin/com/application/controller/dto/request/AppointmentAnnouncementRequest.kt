@@ -5,6 +5,8 @@ import com.application.domain.objects.AppointmentAnnouncement
 data class AppointmentAnnouncementRequest(
     var id: String,
     var name: String,
+    var description: String,
+    var category: String,
     var phone: String,
 ) {
     fun toAnnouncement() =

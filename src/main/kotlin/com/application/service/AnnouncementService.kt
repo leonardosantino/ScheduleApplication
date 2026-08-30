@@ -10,7 +10,13 @@ import org.springframework.stereotype.Service
 class AnnouncementService(
     private val announcementRepository: AnnouncementRepository,
 ) {
-    fun update(request: AnnouncementRequest) = announcementRepository.save(request.toCreate())
+    fun save(request: AnnouncementRequest) = announcementRepository.save(request.toCreate())
+
+    fun update(request: AnnouncementRequest) =
+        announcementRepository
+            .findById(request.id)
+            .map { announcementRepository.save(request.toUpdate(it)) }
+            .orElseThrow { NotFoundException(ExMessage.ANNOUNCEMENT_NOT_FOUND) }
 
     fun findById(id: String) = announcementRepository.findById(id)
 

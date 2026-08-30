@@ -13,12 +13,20 @@ import java.time.LocalDate
 @Service
 class AppointmentService(
     private val appointmentRepository: AppointmentRepository,
+    private val relCustomerProviderService: RelCustomerProviderService,
 ) {
     private val log = getLogger(this::class.java)
 
     fun save(request: AppointmentRequest): Appointment =
         try {
-            appointmentRepository.save(request.toCreate())
+            appointmentRepository.save(request.toCreate()).also {
+                val rel = request.toRelCustomerProvider()
+                relCustomerProviderService.save(
+                    id = rel.id,
+                    customer = rel.customer,
+                    provider = rel.provider,
+                )
+            }
         } catch (ex: DuplicateKeyException) {
             log.error(ex.message)
             throw BadRequestException(ExMessage.APPOINTMENT_TIME_UNAVAILABLE)
