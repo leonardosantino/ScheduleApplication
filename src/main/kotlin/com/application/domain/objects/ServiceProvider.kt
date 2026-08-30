@@ -1,5 +1,5 @@
 package com.application.domain.objects
 
-data class ServiceAnnouncement(
+data class ServiceProvider(
     var id: String,
 )

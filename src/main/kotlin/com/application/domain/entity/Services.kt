@@ -1,6 +1,6 @@
 package com.application.domain.entity
 
-import com.application.domain.objects.ServiceAnnouncement
+import com.application.domain.objects.ServiceProvider
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 import java.math.BigDecimal
@@ -10,7 +10,7 @@ import java.time.Instant
 class Services(
     @Id
     var id: String?,
-    var announcement: ServiceAnnouncement,
+    var provider: ServiceProvider,
     var name: String,
     var description: String,
     var time: Int,

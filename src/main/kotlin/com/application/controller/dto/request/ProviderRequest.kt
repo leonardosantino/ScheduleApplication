@@ -1,20 +1,20 @@
 package com.application.controller.dto.request
 
-import com.application.domain.entity.Announcement
+import com.application.domain.entity.Provider
 import com.application.domain.objects.UserStatus
 import java.text.Normalizer
 import java.text.Normalizer.normalize
 import java.time.Instant
 
-data class AnnouncementRequest(
+data class ProviderRequest(
     var id: String,
     var name: String,
     var category: String,
     var description: String,
     var phone: String,
 ) {
-    fun toCreate(): Announcement =
-        Announcement(
+    fun toCreate(): Provider =
+        Provider(
             id = id,
             slug =
                 name.lowercase().let {
@@ -31,14 +31,14 @@ data class AnnouncementRequest(
             updatedAt = Instant.now(),
         )
 
-    fun toUpdate(announcement: Announcement): Announcement {
-        announcement.name = name
-        announcement.category = category
-        announcement.description = description
-        announcement.phone = phone
+    fun toUpdate(provider: Provider): Provider {
+        provider.name = name
+        provider.category = category
+        provider.description = description
+        provider.phone = phone
 
-        announcement.updatedAt = Instant.now()
+        provider.updatedAt = Instant.now()
 
-        return announcement
+        return provider
     }
 }

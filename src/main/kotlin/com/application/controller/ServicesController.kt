@@ -28,16 +28,16 @@ class ServicesController(
         @RequestBody request: ServiceRequest,
     ) = servicesService.update(request).let { ServiceResponse.from(it) }
 
-    @GetMapping("/announcement/{id}")
-    fun findAllByAnnouncementId(
+    @GetMapping("/provider/{id}")
+    fun findAllByProviderId(
         @PathVariable id: String,
-    ) = servicesService.findAllByAnnouncementId(id).let { ServicesResponse.from(it) }
+    ) = servicesService.findAllByProviderId(id).let { ServicesResponse.from(it) }
 
-    @GetMapping("/announcement/{id}/status/{status}")
-    fun findAllByAnnouncementIdAndStatus(
+    @GetMapping("/provider/{id}/status/{status}")
+    fun findAllByProviderIdAndStatus(
         @PathVariable id: String,
         @PathVariable status: String,
-    ) = servicesService.findAllByAnnouncementIdAndStatus(id, status).let { ServicesResponse.from(it) }
+    ) = servicesService.findAllByProviderIdAndStatus(id, status).let { ServicesResponse.from(it) }
 
     @DeleteMapping("/{id}")
     fun deleteById(

@@ -6,11 +6,11 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface AppointmentRepository : MongoRepository<Appointment, String> {
-    fun findAllByAnnouncementId(id: String): List<Appointment>
+    fun findAllByProviderId(id: String): List<Appointment>
 
     fun findAllByUserId(id: String): List<Appointment>
 
-    fun findAllByAnnouncementIdAndDate(
+    fun findAllByProviderIdAndDate(
         id: String,
         date: String,
     ): List<Appointment>

@@ -20,8 +20,8 @@ class ScheduleController(
         @RequestBody request: ScheduleRequest,
     ) = scheduleService.save(request).let { ScheduleResponse.from(it) }
 
-    @GetMapping("/announcement/{id}")
-    fun findByAnnouncementId(
+    @GetMapping("/provider/{id}")
+    fun findByProviderId(
         @PathVariable id: String,
-    ) = scheduleService.findByAnnouncementId(id).let { ScheduleResponse.from(it) }
+    ) = scheduleService.findByProviderId(id).let { ScheduleResponse.from(it) }
 }

@@ -11,7 +11,7 @@ import java.time.LocalDate
 data class AppointmentRequest(
     var id: String?,
     var user: AppointmentUserRequest,
-    var announcement: AppointmentAnnouncementRequest,
+    var provider: AppointmentProviderRequest,
     var service: AppointmentServiceRequest,
     var date: LocalDate,
     var times: List<Int>,
@@ -20,7 +20,7 @@ data class AppointmentRequest(
         Appointment(
             id = null,
             user = user.toUser(),
-            announcement = announcement.toAnnouncement(),
+            provider = provider.toProvider(),
             service = service.toService(),
             date = date.toString(),
             time = times.first(),
@@ -31,7 +31,7 @@ data class AppointmentRequest(
 
     fun toRelCustomerProvider() =
         RelCustomerProvider(
-            id = IdRelCustomerProvider(user.id, announcement.id),
+            id = IdRelCustomerProvider(user.id, provider.id),
             customer =
                 CustomerRel(
                     name = user.name,
@@ -40,10 +40,10 @@ data class AppointmentRequest(
                 ),
             provider =
                 ProviderRel(
-                    name = announcement.name,
-                    description = announcement.description,
-                    category = announcement.category,
-                    phone = announcement.phone,
+                    name = provider.name,
+                    description = provider.description,
+                    category = provider.category,
+                    phone = provider.phone,
                 ),
             createdAt = Instant.now(),
             updatedAt = Instant.now(),

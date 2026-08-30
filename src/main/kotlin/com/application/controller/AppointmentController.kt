@@ -22,16 +22,16 @@ class AppointmentController(
         @RequestBody request: AppointmentRequest,
     ) = appointmentService.save(request).let { AppointmentResponse.from(it) }
 
-    @GetMapping("/announcement/{id}")
-    fun findAllByAnnouncementId(
+    @GetMapping("/provider/{id}")
+    fun findAllByProviderId(
         @PathVariable id: String,
-    ) = appointmentService.findAllByAnnouncementId(id).let { AppointmentsResponse.from(it) }
+    ) = appointmentService.findAllByProviderId(id).let { AppointmentsResponse.from(it) }
 
-    @GetMapping("/announcement/{id}/date/{date}")
-    fun findAllByAnnouncementIdAndDate(
+    @GetMapping("/provider/{id}/date/{date}")
+    fun findAllByProviderIdAndDate(
         @PathVariable id: String,
         @PathVariable date: LocalDate,
-    ) = appointmentService.findAllByAnnouncementIdAndDate(id, date).let { AppointmentsResponse.from(it) }
+    ) = appointmentService.findAllByProviderIdAndDate(id, date).let { AppointmentsResponse.from(it) }
 
     @GetMapping("/user/{id}")
     fun findAllByUserId(

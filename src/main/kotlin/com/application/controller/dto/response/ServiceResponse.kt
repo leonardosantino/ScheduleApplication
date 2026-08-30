@@ -1,13 +1,13 @@
 package com.application.controller.dto.response
 
 import com.application.domain.entity.Services
-import com.application.domain.objects.ServiceAnnouncement
+import com.application.domain.objects.ServiceProvider
 import java.math.BigDecimal
 import java.time.Instant
 
 data class ServiceResponse(
     var id: String?,
-    var announcement: ServiceAnnouncement,
+    var provider: ServiceProvider,
     var name: String,
     var description: String,
     var time: Int,
@@ -20,7 +20,7 @@ data class ServiceResponse(
         fun from(service: Services) =
             ServiceResponse(
                 id = service.id,
-                announcement = service.announcement,
+                provider = service.provider,
                 name = service.name,
                 description = service.description,
                 time = service.time,
