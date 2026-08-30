@@ -10,7 +10,7 @@ import java.time.LocalDate
 
 data class AppointmentRequest(
     var id: String?,
-    var user: AppointmentUserRequest,
+    var customer: AppointmentUserRequest,
     var provider: AppointmentProviderRequest,
     var service: AppointmentServiceRequest,
     var date: LocalDate,
@@ -19,7 +19,7 @@ data class AppointmentRequest(
     fun toCreate() =
         Appointment(
             id = null,
-            customer = user.toUser(),
+            customer = customer.toCustomer(),
             provider = provider.toProvider(),
             service = service.toService(),
             date = date.toString(),
@@ -31,12 +31,12 @@ data class AppointmentRequest(
 
     fun toRelCustomerProvider() =
         RelCustomerProvider(
-            id = IdRelCustomerProvider(user.id, provider.id),
+            id = IdRelCustomerProvider(customer.id, provider.id),
             customer =
                 CustomerRel(
-                    name = user.name,
-                    lastName = user.lastName,
-                    phone = user.phone,
+                    name = customer.name,
+                    lastName = customer.lastName,
+                    phone = customer.phone,
                 ),
             provider =
                 ProviderRel(
