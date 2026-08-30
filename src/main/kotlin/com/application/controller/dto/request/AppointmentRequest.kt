@@ -19,7 +19,7 @@ data class AppointmentRequest(
     fun toCreate() =
         Appointment(
             id = null,
-            user = user.toUser(),
+            customer = user.toUser(),
             provider = provider.toProvider(),
             service = service.toService(),
             date = date.toString(),
@@ -41,6 +41,7 @@ data class AppointmentRequest(
             provider =
                 ProviderRel(
                     name = provider.name,
+                    slug = provider.slug,
                     description = provider.description,
                     category = provider.category,
                     phone = provider.phone,

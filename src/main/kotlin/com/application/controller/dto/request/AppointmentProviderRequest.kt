@@ -5,6 +5,7 @@ import com.application.domain.objects.AppointmentProvider
 data class AppointmentProviderRequest(
     var id: String,
     var name: String,
+    var slug: String,
     var description: String,
     var category: String,
     var phone: String,

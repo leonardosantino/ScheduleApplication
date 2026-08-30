@@ -2,7 +2,7 @@ package com.application.domain.entity
 
 import com.application.domain.objects.AppointmentProvider
 import com.application.domain.objects.AppointmentService
-import com.application.domain.objects.AppointmentUser
+import com.application.domain.objects.AppointmentCustomer
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 import java.time.Instant
@@ -11,7 +11,7 @@ import java.time.Instant
 data class Appointment(
     @Id
     var id: String?,
-    var user: AppointmentUser,
+    var customer: AppointmentCustomer,
     var provider: AppointmentProvider,
     var service: AppointmentService,
     var date: String,

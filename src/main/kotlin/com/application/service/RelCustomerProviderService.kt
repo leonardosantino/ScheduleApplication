@@ -12,6 +12,8 @@ import java.time.Instant
 class RelCustomerProviderService(
     private val relCustomerProviderRepository: RelCustomerProviderRepository,
 ) {
+    fun findAllByCustomerId(customerId: String): List<RelCustomerProvider> = relCustomerProviderRepository.findAllByIdCustomer(customerId)
+
     fun save(
         id: IdRelCustomerProvider,
         customer: CustomerRel,
@@ -29,6 +31,7 @@ class RelCustomerProviderService(
                 provider =
                     ProviderRel(
                         name = provider.name,
+                        slug = provider.slug,
                         description = provider.description,
                         category = provider.category,
                         phone = provider.phone,

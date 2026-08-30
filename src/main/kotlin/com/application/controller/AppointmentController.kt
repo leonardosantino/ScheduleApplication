@@ -33,8 +33,8 @@ class AppointmentController(
         @PathVariable date: LocalDate,
     ) = appointmentService.findAllByProviderIdAndDate(id, date).let { AppointmentsResponse.from(it) }
 
-    @GetMapping("/user/{id}")
-    fun findAllByUserId(
+    @GetMapping("/customer/{id}")
+    fun findAllByCustomerId(
         @PathVariable id: String,
-    ) = appointmentService.findAllByUserId(id).let { AppointmentsResponse.from(it) }
+    ) = appointmentService.findAllByCustomerId(id).let { AppointmentsResponse.from(it) }
 }

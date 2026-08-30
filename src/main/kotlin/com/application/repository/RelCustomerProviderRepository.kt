@@ -6,4 +6,6 @@ import org.springframework.data.mongodb.repository.MongoRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface RelCustomerProviderRepository : MongoRepository<RelCustomerProvider, IdRelCustomerProvider>
+interface RelCustomerProviderRepository : MongoRepository<RelCustomerProvider, IdRelCustomerProvider> {
+    fun findAllByIdCustomer(customerId: String): List<RelCustomerProvider>
+}

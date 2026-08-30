@@ -1,6 +1,6 @@
 package com.application.controller.dto.request
 
-import com.application.domain.objects.AppointmentUser
+import com.application.domain.objects.AppointmentCustomer
 
 data class AppointmentUserRequest(
     var id: String,
@@ -9,7 +9,7 @@ data class AppointmentUserRequest(
     var phone: String,
 ) {
     fun toUser() =
-        AppointmentUser(
+        AppointmentCustomer(
             id = id,
             name = name,
             lastName = lastName,

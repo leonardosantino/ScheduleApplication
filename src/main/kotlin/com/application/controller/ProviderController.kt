@@ -2,7 +2,9 @@ package com.application.controller
 
 import com.application.controller.dto.request.ProviderRequest
 import com.application.controller.dto.response.ProviderResponse
+import com.application.controller.dto.response.RelProvidersResponse
 import com.application.service.ProviderService
+import com.application.service.RelCustomerProviderService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/providers")
 class ProviderController(
     private val providerService: ProviderService,
+    private val relCustomerProviderService: RelCustomerProviderService,
 ) {
     @PostMapping
     fun save(
@@ -35,4 +38,9 @@ class ProviderController(
     fun findBySlug(
         @PathVariable slug: String,
     ) = providerService.findBySlug(slug).let { ProviderResponse.from(it) }
+
+    @GetMapping("/customer/{id}")
+    fun findAllByCustomerId(
+        @PathVariable id: String,
+    ) = relCustomerProviderService.findAllByCustomerId(id).let { RelProvidersResponse.from(it) }
 }

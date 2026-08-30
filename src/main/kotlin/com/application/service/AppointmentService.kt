@@ -34,7 +34,7 @@ class AppointmentService(
 
     fun findAllByProviderId(id: String): List<Appointment> = appointmentRepository.findAllByProviderId(id)
 
-    fun findAllByUserId(id: String): List<Appointment> = appointmentRepository.findAllByUserId(id)
+    fun findAllByCustomerId(id: String): List<Appointment> = appointmentRepository.findAllByCustomerId(id)
 
     fun findAllByProviderIdAndDate(
         id: String,
