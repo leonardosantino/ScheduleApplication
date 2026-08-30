@@ -1,8 +1,8 @@
 package com.application.domain.entity
 
+import com.application.domain.objects.AppointmentCustomer
 import com.application.domain.objects.AppointmentProvider
 import com.application.domain.objects.AppointmentService
-import com.application.domain.objects.AppointmentCustomer
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 import java.time.Instant
