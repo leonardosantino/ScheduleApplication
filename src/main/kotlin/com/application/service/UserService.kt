@@ -12,9 +12,9 @@ class UserService(
 ) {
     fun save(request: UserRequest) =
         findById(request.id)
-            .orElse(
-                userRepository.save(request.toCreate()),
-            )
+            .orElseGet {
+                userRepository.save(request.toCreate())
+            }
 
     fun updatePhone(request: UpdatePhoneRequest): User {
         val user = findById(request.id).orElseThrow()
