@@ -6,7 +6,7 @@ data class UserResponse(
     var id: String?,
     var username: String,
     var name: String,
-    var lastName: String,
+    var lastName: String?,
     var email: String,
     var phone: String?,
     var status: String,

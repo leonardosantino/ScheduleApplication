@@ -4,4 +4,4 @@ set -e
 
 ./gradlew build
 
-docker build --load --platform linux/amd64 -t leonardosantino/scheduleapplication:0.0.7 .
+docker build --load --platform linux/amd64 -t leonardosantino/scheduleapplication:0.0.8 .

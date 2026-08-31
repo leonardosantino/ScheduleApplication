@@ -5,7 +5,7 @@ import com.application.domain.objects.AppointmentCustomer
 data class AppointmentCustomerResponse(
     var id: String,
     var name: String,
-    var lastName: String,
+    var lastName: String?,
     var phone: String?,
 ) {
     companion object {
