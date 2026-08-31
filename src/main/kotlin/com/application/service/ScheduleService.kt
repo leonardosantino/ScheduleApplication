@@ -11,7 +11,14 @@ import org.springframework.stereotype.Service
 class ScheduleService(
     private val scheduleRepository: ScheduleRepository,
 ) {
-    fun save(request: ScheduleRequest): Schedule = scheduleRepository.save(request.toSchedule())
+    fun save(request: ScheduleRequest): Schedule =
+        scheduleRepository
+            .findById(request.id)
+            .map {
+                scheduleRepository.save(request.toUpdateSchedule(it))
+            }.orElseGet {
+                scheduleRepository.save(request.toCreateSchedule())
+            }
 
     fun findByProviderId(id: String) = scheduleRepository.findById(id).orElseThrow { NotFoundException(ExMessage.SCHEDULE_NOT_FOUND) }
 }

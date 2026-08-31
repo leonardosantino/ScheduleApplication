@@ -1,9 +1,9 @@
 package com.application.service
 
-import com.application.domain.entity.CustomerRel
-import com.application.domain.entity.IdRelCustomerProvider
-import com.application.domain.entity.ProviderRel
 import com.application.domain.entity.RelCustomerProvider
+import com.application.domain.objects.CustomerRel
+import com.application.domain.objects.IdRelCustomerProvider
+import com.application.domain.objects.ProviderRel
 import com.application.repository.RelCustomerProviderRepository
 import org.springframework.stereotype.Service
 import java.time.Instant

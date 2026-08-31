@@ -17,6 +17,7 @@ data class Appointment(
     var date: String,
     var time: Int,
     var times: List<Int>,
+    var status: String?,
     var createdAt: Instant,
     var updatedAt: Instant,
 )

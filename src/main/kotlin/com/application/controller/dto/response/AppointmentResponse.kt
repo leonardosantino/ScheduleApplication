@@ -11,6 +11,7 @@ data class AppointmentResponse(
     var date: String,
     var time: Int,
     var times: List<Int>,
+    var status: String?,
     var createdAt: Instant,
     var updatedAt: Instant,
 ) {
@@ -24,6 +25,7 @@ data class AppointmentResponse(
                 date = appointment.date,
                 time = appointment.time,
                 times = appointment.times,
+                status = appointment.status,
                 createdAt = appointment.createdAt,
                 updatedAt = appointment.updatedAt,
             )
