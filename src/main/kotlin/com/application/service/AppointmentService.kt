@@ -17,8 +17,10 @@ class AppointmentService(
 ) {
     private val log = getLogger(this::class.java)
 
-    fun save(request: AppointmentRequest): Appointment =
-        try {
+    fun save(request: AppointmentRequest): Appointment {
+        if (alreadyScheduled(request)) throw BadRequestException(ExMessage.APPOINTMENT_ALREADY_SCHEDULED)
+
+        return try {
             appointmentRepository.save(request.toCreate()).also {
                 val rel = request.toRelCustomerProvider()
                 relCustomerProviderService.save(
@@ -27,10 +29,10 @@ class AppointmentService(
                     provider = rel.provider,
                 )
             }
-        } catch (ex: DuplicateKeyException) {
-            log.error(ex.message)
+        } catch (_: DuplicateKeyException) {
             throw BadRequestException(ExMessage.APPOINTMENT_TIME_UNAVAILABLE)
         }
+    }
 
     fun findAllByProviderId(id: String): List<Appointment> = appointmentRepository.findAllByProviderId(id)
 
@@ -40,4 +42,7 @@ class AppointmentService(
         id: String,
         date: LocalDate,
     ): List<Appointment> = appointmentRepository.findAllByProviderIdAndDate(id, date.toString())
+
+    fun alreadyScheduled(request: AppointmentRequest): Boolean =
+        appointmentRepository.existsByCustomerIdAndProviderIdAndDate(request.customer.id, request.provider.id, request.date.toString())
 }

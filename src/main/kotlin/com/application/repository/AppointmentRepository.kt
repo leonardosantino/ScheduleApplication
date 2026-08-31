@@ -14,4 +14,10 @@ interface AppointmentRepository : MongoRepository<Appointment, String> {
         id: String,
         date: String,
     ): List<Appointment>
+
+    fun existsByCustomerIdAndProviderIdAndDate(
+        customerId: String,
+        providerId: String,
+        date: String,
+    ): Boolean
 }
