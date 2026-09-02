@@ -4,7 +4,6 @@ import com.application.domain.entity.User
 
 data class UserResponse(
     var id: String?,
-    var username: String,
     var name: String,
     var lastName: String?,
     var email: String,
@@ -15,7 +14,6 @@ data class UserResponse(
         fun from(user: User) =
             UserResponse(
                 id = user.id,
-                username = user.username,
                 name = user.name,
                 lastName = user.lastName,
                 email = user.email,

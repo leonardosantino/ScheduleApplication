@@ -1,10 +1,8 @@
 package com.application.controller.dto.response
 
 import com.application.domain.entity.Appointment
-import java.time.Instant
 
 data class AppointmentResponse(
-    var id: String?,
     var customer: AppointmentCustomerResponse,
     var provider: AppointmentProviderResponse,
     var service: AppointmentServiceResponse,
@@ -12,13 +10,10 @@ data class AppointmentResponse(
     var time: Int,
     var times: List<Int>,
     var status: String?,
-    var createdAt: Instant,
-    var updatedAt: Instant,
 ) {
     companion object {
         fun from(appointment: Appointment) =
             AppointmentResponse(
-                id = appointment.id,
                 customer = AppointmentCustomerResponse.from(appointment.customer),
                 provider = AppointmentProviderResponse.from(appointment.provider),
                 service = AppointmentServiceResponse.from(appointment.service),
@@ -26,8 +21,6 @@ data class AppointmentResponse(
                 time = appointment.time,
                 times = appointment.times,
                 status = appointment.status,
-                createdAt = appointment.createdAt,
-                updatedAt = appointment.updatedAt,
             )
     }
 }

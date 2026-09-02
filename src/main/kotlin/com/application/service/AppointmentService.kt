@@ -5,7 +5,6 @@ import com.application.controller.dto.request.AppointmentRequest
 import com.application.domain.entity.Appointment
 import com.application.exception.BadRequestException
 import com.application.repository.AppointmentRepository
-import org.slf4j.LoggerFactory.getLogger
 import org.springframework.dao.DuplicateKeyException
 import org.springframework.stereotype.Service
 import java.time.LocalDate
@@ -15,8 +14,6 @@ class AppointmentService(
     private val appointmentRepository: AppointmentRepository,
     private val relCustomerProviderService: RelCustomerProviderService,
 ) {
-    private val log = getLogger(this::class.java)
-
     fun save(request: AppointmentRequest): Appointment {
         if (alreadyScheduled(request)) throw BadRequestException(ExMessage.APPOINTMENT_ALREADY_SCHEDULED)
 

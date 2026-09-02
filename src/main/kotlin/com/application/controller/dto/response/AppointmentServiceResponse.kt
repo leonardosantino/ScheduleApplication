@@ -4,7 +4,6 @@ import com.application.domain.objects.AppointmentService
 import java.math.BigDecimal
 
 data class AppointmentServiceResponse(
-    var id: String,
     var name: String,
     var description: String,
     var time: Long,
@@ -13,7 +12,6 @@ data class AppointmentServiceResponse(
     companion object {
         fun from(service: AppointmentService) =
             AppointmentServiceResponse(
-                id = service.id,
                 name = service.name,
                 description = service.description,
                 time = service.time,

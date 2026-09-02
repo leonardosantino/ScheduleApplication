@@ -3,6 +3,7 @@ package com.application.controller
 import com.application.controller.dto.request.AppointmentRequest
 import com.application.controller.dto.response.AppointmentResponse
 import com.application.controller.dto.response.AppointmentsResponse
+import com.application.domain.entity.Appointment
 import com.application.service.AppointmentService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -31,10 +32,33 @@ class AppointmentController(
     fun findAllByProviderIdAndDate(
         @PathVariable id: String,
         @PathVariable date: LocalDate,
-    ) = appointmentService.findAllByProviderIdAndDate(id, date).let { AppointmentsResponse.from(it) }
+    ) = appointmentService.findAllByProviderIdAndDate(id, date).let { AppointmentsAllByDateResponse.from(it) }
 
     @GetMapping("/customer/{id}")
     fun findAllByCustomerId(
         @PathVariable id: String,
     ) = appointmentService.findAllByCustomerId(id).let { AppointmentsResponse.from(it) }
+}
+
+data class AppointmentsAllByDateResponse(
+    val items: List<AppointmentAllResponse>,
+) {
+    companion object {
+        fun from(appointments: List<Appointment>) = AppointmentsAllByDateResponse(appointments.map { AppointmentAllResponse.from(it) })
+    }
+}
+
+data class AppointmentAllResponse(
+    var date: String,
+    var time: Int,
+    var times: List<Int>,
+) {
+    companion object {
+        fun from(appointment: Appointment) =
+            AppointmentAllResponse(
+                date = appointment.date,
+                time = appointment.time,
+                times = appointment.times,
+            )
+    }
 }

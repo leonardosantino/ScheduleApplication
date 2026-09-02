@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service
 class UserService(
     private val userRepository: UserRepository,
 ) {
-    fun save(request: UserRequest) =
+    fun save(request: UserRequest): User =
         findById(request.id)
             .orElseGet {
                 userRepository.save(request.toCreate())

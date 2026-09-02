@@ -1,7 +1,6 @@
 package com.application.controller.dto.response
 
 import com.application.domain.entity.Provider
-import java.time.Instant
 
 data class ProviderResponse(
     var id: String?,
@@ -10,9 +9,6 @@ data class ProviderResponse(
     var description: String,
     var category: String,
     var phone: String,
-    var status: String,
-    var createdAt: Instant,
-    var updatedAt: Instant,
 ) {
     companion object {
         fun from(provider: Provider) =
@@ -23,9 +19,6 @@ data class ProviderResponse(
                 description = provider.description,
                 category = provider.category,
                 phone = provider.phone,
-                status = provider.status,
-                createdAt = provider.createdAt,
-                updatedAt = provider.updatedAt,
             )
     }
 }

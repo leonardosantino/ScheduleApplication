@@ -5,21 +5,9 @@ This is a Spring Boot application.
 ### Technology Stack
 
 Java: 21
-Kotlin: 2.2.21
-Spring boot: 4.0.1
+Kotlin: 2.4.10
+Spring boot: 4.1.1
 MongoDB: 8
-
-kotlin.plugin.spring.version: 2.2.21
-
-kotlin-reflect
-kotlinx-coroutines-core
-kotlinx-coroutines-reactor
-
-spring-boot-starter-data-jpa
-
-hibernate-validator
-jakarta.validation-api
-jackson-module-kotlin
 
 #### Testing
 

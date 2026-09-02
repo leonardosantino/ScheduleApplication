@@ -22,7 +22,7 @@ class UserController(
         @RequestBody user: UserRequest,
     ) = userService
         .save(user)
-        ?.let { UserResponse.from(it) }
+        .let { UserResponse.from(it) }
 
     @PatchMapping("/phone")
     fun updatePhone(
