@@ -12,6 +12,9 @@ class UserService(
 ) {
     fun save(request: UserRequest): User =
         findById(request.id)
+            .map {
+                userRepository.save(request.toUpdate(it))
+            }
             .orElseGet {
                 userRepository.save(request.toCreate())
             }

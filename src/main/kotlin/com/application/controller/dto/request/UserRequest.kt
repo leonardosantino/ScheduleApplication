@@ -29,4 +29,13 @@ data class UserRequest(
             createdAt = Instant.now(),
             updatedAt = Instant.now(),
         )
+
+    fun toUpdate(user: User): User {
+        user.name = name
+        user.lastName = lastName
+        user.updatedAt = Instant.now()
+
+        return user
+    }
+
 }
