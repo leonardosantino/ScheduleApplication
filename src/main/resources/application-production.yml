@@ -1,7 +1,10 @@
 spring:
+  config:
+    import: aws-secretsmanager:agendily
   mongodb:
-    uri: mongodb://schedule:Dg2uVAB1NkztLxuk@scheduledatabase:27017/schedule
+    uri: ${asm.mongodb.uri}
+
 
 aws:
   cognito:
-    userPoolId: us-east-1_Z6Cv18dod
+    userPoolId: us-east-1_0zpeIuMMO
