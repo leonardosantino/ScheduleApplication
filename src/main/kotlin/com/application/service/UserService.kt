@@ -14,8 +14,7 @@ class UserService(
         findById(request.id)
             .map {
                 userRepository.save(request.toUpdate(it))
-            }
-            .orElseGet {
+            }.orElseGet {
                 userRepository.save(request.toCreate())
             }
 
