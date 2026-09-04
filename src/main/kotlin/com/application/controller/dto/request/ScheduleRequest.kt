@@ -3,7 +3,7 @@ package com.application.controller.dto.request
 import com.application.domain.entity.Schedule
 import java.time.Instant
 
-class ScheduleRequest(
+data class ScheduleRequest(
     var id: String,
     var days: MutableMap<String, ScheduleDayRequest>,
 ) {

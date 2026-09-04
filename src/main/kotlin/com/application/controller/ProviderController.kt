@@ -1,5 +1,6 @@
 package com.application.controller
 
+import com.application.common.util.Jwt
 import com.application.controller.dto.request.ProviderRequest
 import com.application.controller.dto.response.ProviderResponse
 import com.application.controller.dto.response.RelProvidersResponse
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestHeader
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
@@ -22,12 +24,14 @@ class ProviderController(
     @PostMapping
     fun save(
         @RequestBody request: ProviderRequest,
-    ) = providerService.save(request).let { ProviderResponse.from(it) }
+        @RequestHeader authorization: String,
+    ) = providerService.save(request.copy(id = Jwt.sub(authorization))).let { ProviderResponse.from(it) }
 
     @PutMapping
     fun update(
         @RequestBody request: ProviderRequest,
-    ) = providerService.update(request).let { ProviderResponse.from(it) }
+        @RequestHeader authorization: String,
+    ) = providerService.update(request.copy(id = Jwt.sub(authorization))).let { ProviderResponse.from(it) }
 
     @GetMapping("/{id}")
     fun findById(
