@@ -3,6 +3,7 @@ package com.application.controller.dto.response
 import com.application.domain.entity.Appointment
 
 data class AppointmentResponse(
+    var id: String?,
     var customer: AppointmentCustomerResponse,
     var provider: AppointmentProviderResponse,
     var service: AppointmentServiceResponse,
@@ -14,6 +15,7 @@ data class AppointmentResponse(
     companion object {
         fun from(appointment: Appointment) =
             AppointmentResponse(
+                id = appointment.id,
                 customer = AppointmentCustomerResponse.from(appointment.customer),
                 provider = AppointmentProviderResponse.from(appointment.provider),
                 service = AppointmentServiceResponse.from(appointment.service),

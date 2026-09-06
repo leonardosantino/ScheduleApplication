@@ -2,7 +2,9 @@ package com.application.service
 
 import com.application.common.constants.ExMessage
 import com.application.controller.dto.request.AppointmentRequest
+import com.application.controller.dto.request.AppointmentStatusRequest
 import com.application.domain.entity.Appointment
+import com.application.domain.objects.AppointmentStatus
 import com.application.exception.BadRequestException
 import com.application.repository.AppointmentRepository
 import org.springframework.dao.DuplicateKeyException
@@ -31,15 +33,30 @@ class AppointmentService(
         }
     }
 
-    fun findAllByProviderId(id: String): List<Appointment> = appointmentRepository.findAllByProviderId(id)
+    fun update(request: AppointmentStatusRequest) =
+        appointmentRepository.findById(request.id).map {
+            appointmentRepository.save(request.toUpdate(it))
+        }
 
     fun findAllByCustomerId(id: String): List<Appointment> = appointmentRepository.findAllByCustomerId(id)
+
+    fun findAllByProviderId(id: String): List<Appointment> = appointmentRepository.findAllByProviderId(id)
 
     fun findAllByProviderIdAndDate(
         id: String,
         date: LocalDate,
-    ): List<Appointment> = appointmentRepository.findAllByProviderIdAndDate(id, date.toString())
+    ): List<Appointment> =
+        appointmentRepository.findAllByProviderIdAndDateAndStatus(
+            id,
+            date.toString(),
+            AppointmentStatus.CONFIRMED.value,
+        )
 
     fun alreadyScheduled(request: AppointmentRequest): Boolean =
-        appointmentRepository.existsByCustomerIdAndProviderIdAndDate(request.customer.id, request.provider.id, request.date.toString())
+        appointmentRepository.existsByCustomerIdAndProviderIdAndDateAndStatus(
+            request.customer.id,
+            request.provider.id,
+            request.date.toString(),
+            AppointmentStatus.CONFIRMED.value,
+        )
 }

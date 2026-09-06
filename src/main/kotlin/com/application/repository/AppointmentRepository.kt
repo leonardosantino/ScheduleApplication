@@ -10,14 +10,16 @@ interface AppointmentRepository : MongoRepository<Appointment, String> {
 
     fun findAllByCustomerId(id: String): List<Appointment>
 
-    fun findAllByProviderIdAndDate(
+    fun findAllByProviderIdAndDateAndStatus(
         id: String,
         date: String,
+        status: String,
     ): List<Appointment>
 
-    fun existsByCustomerIdAndProviderIdAndDate(
+    fun existsByCustomerIdAndProviderIdAndDateAndStatus(
         customerId: String,
         providerId: String,
         date: String,
+        status: String,
     ): Boolean
 }
