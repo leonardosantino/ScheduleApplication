@@ -22,4 +22,11 @@ interface AppointmentRepository : MongoRepository<Appointment, String> {
         date: String,
         status: String,
     ): Boolean
+
+    fun existsByProviderIdAndDateAndTimeAndStatus(
+        providerId: String,
+        date: String,
+        time: Int,
+        status: String,
+    ): Boolean
 }

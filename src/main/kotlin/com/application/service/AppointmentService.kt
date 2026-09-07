@@ -7,7 +7,6 @@ import com.application.domain.entity.Appointment
 import com.application.domain.objects.AppointmentStatus
 import com.application.exception.BadRequestException
 import com.application.repository.AppointmentRepository
-import org.springframework.dao.DuplicateKeyException
 import org.springframework.stereotype.Service
 import java.time.LocalDate
 
@@ -17,19 +16,16 @@ class AppointmentService(
     private val relCustomerProviderService: RelCustomerProviderService,
 ) {
     fun save(request: AppointmentRequest): Appointment {
-        if (alreadyScheduled(request)) throw BadRequestException(ExMessage.APPOINTMENT_ALREADY_SCHEDULED)
+        if (existsByCustomerIdAndProviderIdAndDateAndStatus(request)) throw BadRequestException(ExMessage.APPOINTMENT_ALREADY_SCHEDULED)
+        if (existsByProviderIdAndDateAndStatus(request)) throw BadRequestException(ExMessage.APPOINTMENT_TIME_UNAVAILABLE)
 
-        return try {
-            appointmentRepository.save(request.toCreate()).also {
-                val rel = request.toRelCustomerProvider()
-                relCustomerProviderService.save(
-                    id = rel.id,
-                    customer = rel.customer,
-                    provider = rel.provider,
-                )
-            }
-        } catch (_: DuplicateKeyException) {
-            throw BadRequestException(ExMessage.APPOINTMENT_TIME_UNAVAILABLE)
+        return appointmentRepository.save(request.toCreate()).also {
+            val rel = request.toRelCustomerProvider()
+            relCustomerProviderService.save(
+                id = rel.id,
+                customer = rel.customer,
+                provider = rel.provider,
+            )
         }
     }
 
@@ -52,11 +48,19 @@ class AppointmentService(
             AppointmentStatus.CONFIRMED.value,
         )
 
-    fun alreadyScheduled(request: AppointmentRequest): Boolean =
+    fun existsByCustomerIdAndProviderIdAndDateAndStatus(request: AppointmentRequest): Boolean =
         appointmentRepository.existsByCustomerIdAndProviderIdAndDateAndStatus(
             request.customer.id,
             request.provider.id,
             request.date.toString(),
+            AppointmentStatus.CONFIRMED.value,
+        )
+
+    fun existsByProviderIdAndDateAndStatus(request: AppointmentRequest): Boolean =
+        appointmentRepository.existsByProviderIdAndDateAndTimeAndStatus(
+            request.provider.id,
+            request.date.toString(),
+            request.times.first(),
             AppointmentStatus.CONFIRMED.value,
         )
 }
