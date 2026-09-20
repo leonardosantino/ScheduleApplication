@@ -23,4 +23,4 @@ jobs:
           context: .
           platforms: linux/amd64
           push: true
-          tags: leonardosantino/structoapplication:${{ inputs.version }}
+          tags: leonardosantino/scheduleapplication:${{ inputs.version }}
