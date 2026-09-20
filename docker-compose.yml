@@ -1,7 +1,7 @@
 services:
   scheduleapplication:
     container_name: scheduleapplication
-    image: leonardosantino/scheduleapplication:0.0.14
+    image: leonardosantino/scheduleapplication:local
     restart: unless-stopped
     ports:
       - "8080:8080"
@@ -39,4 +39,4 @@ volumes:
 
 networks:
   default:
-    name: schedule_default
+    name: schedulenetwork

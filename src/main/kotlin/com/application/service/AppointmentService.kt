@@ -6,7 +6,10 @@ import com.application.controller.dto.request.AppointmentStatusRequest
 import com.application.domain.entity.Appointment
 import com.application.domain.objects.AppointmentStatus
 import com.application.exception.BadRequestException
+import com.application.notification.dto.AppointmentCanceledEvent
+import com.application.notification.dto.AppointmentCreatedEvent
 import com.application.repository.AppointmentRepository
+import org.springframework.context.ApplicationEventPublisher
 import org.springframework.stereotype.Service
 import java.time.LocalDate
 
@@ -14,6 +17,7 @@ import java.time.LocalDate
 class AppointmentService(
     private val appointmentRepository: AppointmentRepository,
     private val relCustomerProviderService: RelCustomerProviderService,
+    private val eventPublisher: ApplicationEventPublisher,
 ) {
     fun save(request: AppointmentRequest): Appointment {
         if (existsByCustomerIdAndProviderIdAndDateAndStatus(request)) throw BadRequestException(ExMessage.APPOINTMENT_ALREADY_SCHEDULED)
@@ -26,12 +30,15 @@ class AppointmentService(
                 customer = rel.customer,
                 provider = rel.provider,
             )
+            eventPublisher.publishEvent(AppointmentCreatedEvent(it))
         }
     }
 
     fun update(request: AppointmentStatusRequest) =
         appointmentRepository.findById(request.id).map {
-            appointmentRepository.save(request.toUpdate(it))
+            appointmentRepository.save(request.toUpdate(it)).also { apt ->
+                if (apt.isCanceled()) eventPublisher.publishEvent(AppointmentCanceledEvent(apt))
+            }
         }
 
     fun findAllByCustomerId(id: String): List<Appointment> = appointmentRepository.findAllByCustomerId(id)
