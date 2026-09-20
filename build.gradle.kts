@@ -3,6 +3,7 @@ version = "0.0.1-SNAPSHOT"
 description = "Schedule Application"
 
 plugins {
+    kotlin("kapt") version "2.4.10"
     kotlin("jvm") version "2.4.10"
     kotlin("plugin.spring") version "2.4.10"
 
@@ -18,6 +19,7 @@ dependencies {
 
     implementation("org.jetbrains.kotlin:kotlin-reflect")
 
+    implementation("com.interaso:webpush:1.2.0")
     implementation("software.amazon.awssdk:cognitoidentityprovider:2.45.1")
     implementation("io.awspring.cloud:spring-cloud-aws-starter-secrets-manager:4.1.1")
 
@@ -25,10 +27,11 @@ dependencies {
     implementation("jakarta.validation:jakarta.validation-api:4.0.0-M1")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 
-    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
+    kapt("org.springframework.boot:spring-boot-configuration-processor")
 
     developmentOnly("org.springframework.boot:spring-boot-devtools")
 
+    testImplementation(kotlin("test"))
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
 

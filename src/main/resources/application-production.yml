@@ -8,3 +8,8 @@ spring:
 aws:
   cognito:
     userPoolId: us-east-1_0zpeIuMMO
+
+vapid:
+  publicKey: BAVOkJ33u7oGJeyllbqzklPmdcezdFvBbMwmvr6P0BknoawPAMoRpOZplSdHh1C2kArm3uiQ22932Am-Qke9RJM
+  privateKey: ${asm.vapid.privateKey}
+  subject: mailto:softxre@googlegroups.com
