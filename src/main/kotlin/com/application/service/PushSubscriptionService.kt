@@ -1,6 +1,7 @@
-package com.application.notification
+package com.application.service
 
 import com.application.notification.dto.PushSubscriptionRequest
+import com.application.repository.PushSubscriptionRepository
 import org.springframework.stereotype.Service
 
 @Service

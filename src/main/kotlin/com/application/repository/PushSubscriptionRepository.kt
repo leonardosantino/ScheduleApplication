@@ -1,4 +1,4 @@
-package com.application.notification
+package com.application.repository
 
 import com.application.notification.entity.PushSubscription
 import org.springframework.data.mongodb.repository.MongoRepository

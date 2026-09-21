@@ -1,7 +1,8 @@
-package com.application.notification
+package com.application.controller
 
 import com.application.common.util.Jwt
 import com.application.notification.dto.PushSubscriptionRequest
+import com.application.service.PushSubscriptionService
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
