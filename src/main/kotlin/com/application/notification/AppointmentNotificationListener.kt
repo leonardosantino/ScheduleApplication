@@ -2,6 +2,7 @@ package com.application.notification
 
 import com.application.notification.dto.AppointmentCanceledEvent
 import com.application.notification.dto.AppointmentCreatedEvent
+import com.application.notification.dto.AppointmentReminderEvent
 import org.springframework.context.event.EventListener
 import org.springframework.scheduling.annotation.Async
 import org.springframework.stereotype.Component
@@ -46,6 +47,26 @@ class AppointmentNotificationListener(
         pushNotificationService.send(
             title = title,
             body = cBody,
+            id = appointment.customer.id,
+            url = urlHome,
+        )
+    }
+
+    @Async
+    @EventListener
+    fun onReminder(event: AppointmentReminderEvent) {
+        val appointment = event.appointment
+
+        pushNotificationService.send(
+            title = title,
+            body = "Seu agendamento com ${appointment.customer.name} começa em 15 minutos.",
+            id = appointment.provider.id,
+            url = urlHome,
+        )
+
+        pushNotificationService.send(
+            title = title,
+            body = "Seu agendamento com ${appointment.provider.name} começa em 15 minutos.",
             id = appointment.customer.id,
             url = urlHome,
         )

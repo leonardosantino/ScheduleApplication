@@ -16,6 +16,13 @@ interface AppointmentRepository : MongoRepository<Appointment, String> {
         status: String,
     ): List<Appointment>
 
+    fun findAllByDateAndStatusAndTimeBetween(
+        date: String,
+        status: String,
+        fromTime: Int,
+        toTime: Int,
+    ): List<Appointment>
+
     fun existsByCustomerIdAndProviderIdAndDateAndStatus(
         customerId: String,
         providerId: String,
