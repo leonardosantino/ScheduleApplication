@@ -1,0 +1,13 @@
+FROM ibm-semeru-runtimes:open-25-jre
+
+RUN groupadd --system jre && useradd --system --gid jre jre
+
+USER jre
+
+WORKDIR /app
+
+COPY --chown=jre:jre build/libs/*SNAPSHOT.jar SNAPSHOT.jar
+
+EXPOSE 8080
+
+ENTRYPOINT ["java", "-jar", "SNAPSHOT.jar"]

@@ -4,4 +4,4 @@ set -e
 
 ./gradlew build
 
-docker build --load --platform linux/amd64 -t leonardosantino/scheduleapplication:local .
+docker build --load -f Dockerfile.local --platform linux/amd64 -t leonardosantino/scheduleapplication:local .
