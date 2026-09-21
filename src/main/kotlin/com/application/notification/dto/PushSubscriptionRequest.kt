@@ -1,6 +1,6 @@
 package com.application.notification.dto
 
-import com.application.notification.entity.PushSubscription
+import com.application.domain.entity.PushSubscription
 import java.time.Instant
 
 data class PushSubscriptionRequest(

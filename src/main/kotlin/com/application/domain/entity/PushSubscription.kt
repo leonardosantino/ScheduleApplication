@@ -1,4 +1,4 @@
-package com.application.notification.entity
+package com.application.domain.entity
 
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document

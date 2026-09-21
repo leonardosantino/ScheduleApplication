@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component
 class AppointmentNotificationListener(
     private val pushNotificationService: PushNotificationService,
 ) {
-    private val app = "Agendily"
-    private val homePath = "/"
+    private val title = "Agendily"
+    private val urlHome = "/"
 
     @Async
     @EventListener
@@ -20,10 +20,10 @@ class AppointmentNotificationListener(
         val body = "${appointment.customer.name} agendou ${appointment.service.name} com você."
 
         pushNotificationService.send(
-            title = app,
+            title = title,
             body = body,
             id = appointment.provider.id,
-            url = homePath,
+            url = urlHome,
         )
     }
 
@@ -35,19 +35,19 @@ class AppointmentNotificationListener(
         val pBody = "Seu agendamento com ${appointment.customer.name} foi cancelado."
 
         pushNotificationService.send(
-            title = app,
+            title = title,
             body = pBody,
             id = appointment.provider.id,
-            url = homePath,
+            url = urlHome,
         )
 
         val cBody = "Seu agendamento com ${appointment.provider.name} foi cancelado."
 
         pushNotificationService.send(
-            title = app,
+            title = title,
             body = cBody,
             id = appointment.customer.id,
-            url = homePath,
+            url = urlHome,
         )
     }
 }

@@ -1,6 +1,6 @@
 package com.application.repository
 
-import com.application.notification.entity.PushSubscription
+import com.application.domain.entity.PushSubscription
 import org.springframework.data.mongodb.repository.MongoRepository
 import org.springframework.stereotype.Repository
 

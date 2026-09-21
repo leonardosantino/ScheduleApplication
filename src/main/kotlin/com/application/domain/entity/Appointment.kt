@@ -1,5 +1,6 @@
 package com.application.domain.entity
 
+import com.application.domain.objects.AppointmentCancellation
 import com.application.domain.objects.AppointmentCustomer
 import com.application.domain.objects.AppointmentProvider
 import com.application.domain.objects.AppointmentService
@@ -19,6 +20,7 @@ data class Appointment(
     var time: Int,
     var times: List<Int>,
     var status: String,
+    var cancellation: AppointmentCancellation? = null,
     var createdAt: Instant,
     var updatedAt: Instant,
 ) {
