@@ -11,6 +11,7 @@ data class AppointmentResponse(
     var time: Int,
     var times: List<Int>,
     var status: String?,
+    var cancellation: AppointmentCancellationResponse?,
 ) {
     companion object {
         fun from(appointment: Appointment) =
@@ -23,6 +24,7 @@ data class AppointmentResponse(
                 time = appointment.time,
                 times = appointment.times,
                 status = appointment.status,
+                cancellation = appointment.cancellation?.let { AppointmentCancellationResponse.from(it) },
             )
     }
 }

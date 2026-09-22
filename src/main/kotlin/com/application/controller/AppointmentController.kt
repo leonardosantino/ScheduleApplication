@@ -1,8 +1,8 @@
 package com.application.controller
 
 import com.application.common.util.Jwt
+import com.application.controller.dto.request.AppointmentCancellationRequest
 import com.application.controller.dto.request.AppointmentRequest
-import com.application.controller.dto.request.AppointmentStatusRequest
 import com.application.controller.dto.response.AppointmentResponse
 import com.application.controller.dto.response.AppointmentsByDateResponse
 import com.application.controller.dto.response.AppointmentsResponse
@@ -27,10 +27,11 @@ class AppointmentController(
         @RequestBody request: AppointmentRequest,
     ) = appointmentService.save(request).let { AppointmentResponse.from(it) }
 
-    @PutMapping
-    fun update(
-        @RequestBody request: AppointmentStatusRequest,
-    ) = appointmentService.update(request).map { AppointmentResponse.from(it) }
+    @PutMapping("/{id}/cancel")
+    fun cancel(
+        @PathVariable id: String,
+        @RequestBody request: AppointmentCancellationRequest,
+    ) = AppointmentResponse.from(appointmentService.cancel(id, request))
 
     @GetMapping("/customer/{id}")
     fun findAllByCustomerId(

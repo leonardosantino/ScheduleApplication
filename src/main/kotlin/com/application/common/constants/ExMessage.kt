@@ -7,4 +7,5 @@ object ExMessage {
     const val ANNOUNCEMENT_NOT_FOUND = "Anúncio não encontrado."
     const val PROVIDER_NOT_FOUND = "Prestador não encontrado."
     const val SERVICE_NOT_FOUND = "Serviço não encontrado."
+    const val APPOINTMENT_NOT_FOUND = "Agendamento não encontrado."
 }

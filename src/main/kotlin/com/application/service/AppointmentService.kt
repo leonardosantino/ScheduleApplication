@@ -1,11 +1,12 @@
 package com.application.service
 
 import com.application.common.constants.ExMessage
+import com.application.controller.dto.request.AppointmentCancellationRequest
 import com.application.controller.dto.request.AppointmentRequest
-import com.application.controller.dto.request.AppointmentStatusRequest
 import com.application.domain.entity.Appointment
 import com.application.domain.objects.AppointmentStatus
 import com.application.exception.BadRequestException
+import com.application.exception.NotFoundException
 import com.application.notification.dto.AppointmentCanceledEvent
 import com.application.notification.dto.AppointmentCreatedEvent
 import com.application.repository.AppointmentRepository
@@ -34,12 +35,17 @@ class AppointmentService(
         }
     }
 
-    fun update(request: AppointmentStatusRequest) =
-        appointmentRepository.findById(request.id).map {
-            appointmentRepository.save(request.toUpdate(it)).also { apt ->
-                if (apt.isCanceled()) eventPublisher.publishEvent(AppointmentCanceledEvent(apt))
-            }
+    fun cancel(
+        id: String,
+        request: AppointmentCancellationRequest,
+    ): Appointment {
+        val appointment =
+            appointmentRepository.findById(id).orElseThrow { NotFoundException(ExMessage.APPOINTMENT_NOT_FOUND) }
+
+        return appointmentRepository.save(request.toUpdate(appointment)).also {
+            eventPublisher.publishEvent(AppointmentCanceledEvent(it))
         }
+    }
 
     fun findAllByCustomerId(id: String): List<Appointment> = appointmentRepository.findAllByCustomerId(id)
 
