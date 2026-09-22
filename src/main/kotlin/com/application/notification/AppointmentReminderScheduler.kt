@@ -1,4 +1,4 @@
-package com.application.service
+package com.application.notification
 
 import com.application.common.constants.Zone
 import com.application.domain.objects.AppointmentStatus

@@ -9,11 +9,11 @@ class PushSubscriptionService(
     private val pushSubscriptionRepository: PushSubscriptionRepository,
 ) {
     fun save(
-        userId: String,
+        id: String,
         request: PushSubscriptionRequest,
     ) {
-        pushSubscriptionRepository.findByIdAndEndpoint(userId, request.endpoint)?.let { return }
-
-        pushSubscriptionRepository.save(request.toCreate(userId))
+        pushSubscriptionRepository.findByUserIdAndRole(id, request.role).orElseGet {
+            pushSubscriptionRepository.save(request.toCreate(id))
+        }
     }
 }

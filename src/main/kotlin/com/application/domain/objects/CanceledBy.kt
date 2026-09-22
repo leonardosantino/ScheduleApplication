@@ -1,7 +1,7 @@
 package com.application.domain.objects
 
 enum class CanceledBy(
-    value: String,
+    val value: String,
 ) {
     CUSTOMER("Cliente"),
     PROVIDER("Prestador"),
