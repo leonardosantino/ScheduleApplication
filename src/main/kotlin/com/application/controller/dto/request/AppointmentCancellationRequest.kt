@@ -6,19 +6,25 @@ import com.application.domain.objects.AppointmentStatus
 import java.time.Instant
 
 data class AppointmentCancellationRequest(
-    var reason: String,
-    var canceledBy: String,
+    var cancellation: CancellationRequest,
 ) {
     fun toUpdate(appointment: Appointment): Appointment {
         appointment.status = AppointmentStatus.CANCELED.value
-        appointment.cancellation =
-            AppointmentCancellation(
-                reason = reason,
-                canceledBy = canceledBy,
-                canceledAt = Instant.now(),
-            )
+        appointment.cancellation = cancellation.toCancellation()
         appointment.updatedAt = Instant.now()
 
         return appointment
     }
+}
+
+data class CancellationRequest(
+    var reason: String,
+    var canceledBy: String,
+) {
+    fun toCancellation(): AppointmentCancellation =
+        AppointmentCancellation(
+            reason = reason,
+            canceledBy = canceledBy,
+            canceledAt = Instant.now(),
+        )
 }
