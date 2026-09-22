@@ -18,11 +18,10 @@ class AppointmentNotificationListener(
     @Async
     @EventListener
     fun onCreated(event: AppointmentCreatedEvent) {
-        val appointment = event.appointment
-        val body = "${appointment.customer.name} agendou ${appointment.service.name} com você."
+        val body = "${event.appointment.customer.name} agendou ${event.appointment.service.name} com você."
 
         pushNotificationService.send(
-            id = appointment.provider.id,
+            id = event.appointment.provider.id,
             role = UserRole.PROVIDER.value,
             title = title,
             body = body,
@@ -33,46 +32,44 @@ class AppointmentNotificationListener(
     @Async
     @EventListener
     fun onCanceled(event: AppointmentCanceledEvent) {
-        val appointment = event.appointment
+        if (event.appointment.isCalledByProvider()) {
+            val cBody = "Seu agendamento com ${event.appointment.provider.name} foi cancelado."
 
-        val cBody = "Seu agendamento com ${appointment.provider.name} foi cancelado."
+            pushNotificationService.send(
+                id = event.appointment.customer.id,
+                title = title,
+                body = cBody,
+                url = urlHome,
+                role = null,
+            )
+        } else {
+            val pBody = "Seu agendamento com ${event.appointment.customer.name} foi cancelado."
 
-        pushNotificationService.send(
-            id = appointment.customer.id,
-            title = title,
-            body = cBody,
-            url = urlHome,
-            role = null,
-        )
-
-        val pBody = "Seu agendamento com ${appointment.customer.name} foi cancelado."
-
-        pushNotificationService.send(
-            id = appointment.provider.id,
-            title = title,
-            body = pBody,
-            url = urlHome,
-            role = UserRole.PROVIDER.value,
-        )
+            pushNotificationService.send(
+                id = event.appointment.provider.id,
+                title = title,
+                body = pBody,
+                url = urlHome,
+                role = UserRole.PROVIDER.value,
+            )
+        }
     }
 
     @Async
     @EventListener
     fun onReminder(event: AppointmentReminderEvent) {
-        val appointment = event.appointment
-
         pushNotificationService.send(
-            id = appointment.provider.id,
+            id = event.appointment.provider.id,
             role = UserRole.PROVIDER.value,
             title = title,
-            body = "Seu agendamento com ${appointment.customer.name} começa em 15 minutos.",
+            body = "15 minutos para seu agendamento com ${event.appointment.customer.name}.",
             url = urlHome,
         )
 
         pushNotificationService.send(
-            id = appointment.customer.id,
+            id = event.appointment.customer.id,
             title = title,
-            body = "Seu agendamento com ${appointment.provider.name} começa em 15 minutos.",
+            body = "15 minutos para seu agendamento com ${event.appointment.provider.name}.",
             url = urlHome,
             role = null,
         )
