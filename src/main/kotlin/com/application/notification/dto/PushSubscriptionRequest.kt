@@ -12,14 +12,22 @@ data class PushSubscriptionRequest(
     fun toCreate(id: String) =
         PushSubscription(
             id = null,
-            user =
-                PushSubscriptionUser(
-                    id = id,
-                ),
+            user = PushSubscriptionUser(id),
             role = role,
             endpoint = endpoint,
             p256dh = keys.p256dh,
             auth = keys.auth,
             createdAt = Instant.now(),
+            updatedAt = Instant.now(),
         )
+
+    fun toUpdate(subscription: PushSubscription): PushSubscription {
+        subscription.endpoint = endpoint
+        subscription.p256dh = keys.p256dh
+        subscription.auth = keys.auth
+
+        subscription.updatedAt = Instant.now()
+
+        return subscription
+    }
 }

@@ -12,8 +12,12 @@ class PushSubscriptionService(
         id: String,
         request: PushSubscriptionRequest,
     ) {
-        pushSubscriptionRepository.findByUserIdAndRole(id, request.role).orElseGet {
-            pushSubscriptionRepository.save(request.toCreate(id))
-        }
+        val subscription =
+            pushSubscriptionRepository
+                .findByUserIdAndRole(id, request.role)
+                .map { request.toUpdate(it) }
+                .orElseGet { request.toCreate(id) }
+
+        pushSubscriptionRepository.save(subscription)
     }
 }

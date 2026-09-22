@@ -14,6 +14,7 @@ data class PushSubscription(
     var p256dh: String,
     var auth: String,
     var createdAt: Instant,
+    var updatedAt: Instant,
 )
 
 data class PushSubscriptionUser(
