@@ -2,6 +2,7 @@ package com.application.service
 
 import com.application.common.constants.ExMessage
 import com.application.controller.dto.request.ProviderRequest
+import com.application.domain.objects.UserStatus
 import com.application.exception.NotFoundException
 import com.application.repository.ProviderRepository
 import org.springframework.stereotype.Service
@@ -22,6 +23,6 @@ class ProviderService(
 
     fun findBySlug(slug: String) =
         providerRepository
-            .findBySlug(slug)
+            .findBySlugAndStatus(slug, UserStatus.ENABLED.value)
             .orElseThrow { NotFoundException(ExMessage.ANNOUNCEMENT_NOT_FOUND) }
 }
