@@ -7,23 +7,10 @@ import java.time.Instant
 @Document
 data class PushSubscription(
     @Id
-    var id: String?,
-    var user: PushSubscriptionUser,
-    var role: String? = null,
+    var id: String,
     var endpoint: String,
     var p256dh: String,
     var auth: String,
     var createdAt: Instant,
     var updatedAt: Instant,
 )
-
-data class PushSubscriptionUser(
-    var id: String,
-)
-
-enum class UserRole(
-    val value: String,
-) {
-    PROVIDER("Prestador"),
-    CUSTOMER("Cliente"),
-}

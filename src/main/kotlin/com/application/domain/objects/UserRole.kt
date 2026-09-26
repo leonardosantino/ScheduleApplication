@@ -1,9 +1,8 @@
 package com.application.domain.objects
 
-enum class CanceledBy(
+enum class UserRole(
     val value: String,
 ) {
     CUSTOMER("Cliente"),
     PROVIDER("Prestador"),
-    SYSTEM("Sistema"),
 }

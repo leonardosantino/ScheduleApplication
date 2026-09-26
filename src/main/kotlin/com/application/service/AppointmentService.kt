@@ -25,12 +25,7 @@ class AppointmentService(
         if (existsByProviderIdAndDateAndStatus(request)) throw BadRequestException(ExMessage.APPOINTMENT_TIME_UNAVAILABLE)
 
         return appointmentRepository.save(request.toCreate()).also {
-            val rel = request.toRelCustomerProvider()
-            relCustomerProviderService.save(
-                id = rel.id,
-                customer = rel.customer,
-                provider = rel.provider,
-            )
+            relCustomerProviderService.save(request.toRelCustomerProvider())
             eventPublisher.publishEvent(AppointmentCreatedEvent(it))
         }
     }

@@ -19,9 +19,9 @@ class UserController(
 ) {
     @PostMapping
     fun save(
-        @RequestBody user: UserRequest,
+        @RequestBody request: UserRequest,
     ) = userService
-        .save(user)
+        .save(request)
         .let { UserResponse.from(it) }
 
     @PatchMapping("/phone")

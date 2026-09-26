@@ -1,11 +1,16 @@
 package com.application.repository
 
 import com.application.domain.entity.RelCustomerProvider
-import com.application.domain.objects.IdRelCustomerProvider
 import org.springframework.data.mongodb.repository.MongoRepository
 import org.springframework.stereotype.Repository
+import java.util.Optional
 
 @Repository
-interface RelCustomerProviderRepository : MongoRepository<RelCustomerProvider, IdRelCustomerProvider> {
-    fun findAllByIdCustomer(customerId: String): List<RelCustomerProvider>
+interface RelCustomerProviderRepository : MongoRepository<RelCustomerProvider, String> {
+    fun findByCustomerIdAndProviderId(
+        customerId: String,
+        providerId: String,
+    ): Optional<RelCustomerProvider>
+
+    fun findAllByCustomerId(id: String): List<RelCustomerProvider>
 }

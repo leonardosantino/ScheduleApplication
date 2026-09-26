@@ -11,7 +11,8 @@ class UserService(
     private val userRepository: UserRepository,
 ) {
     fun save(request: UserRequest): User =
-        findById(request.id)
+        userRepository
+            .findByProviderIdAndRole(request.provider.id, request.role)
             .map {
                 userRepository.save(request.toUpdate(it))
             }.orElseGet {
@@ -19,7 +20,7 @@ class UserService(
             }
 
     fun updatePhone(request: UpdatePhoneRequest): User {
-        val user = findById(request.id).orElseThrow()
+        val user = userRepository.findById(request.id).orElseThrow()
 
         return userRepository.save(request.toUser(user))
     }

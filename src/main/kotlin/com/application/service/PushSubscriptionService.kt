@@ -8,15 +8,12 @@ import org.springframework.stereotype.Service
 class PushSubscriptionService(
     private val pushSubscriptionRepository: PushSubscriptionRepository,
 ) {
-    fun save(
-        id: String,
-        request: PushSubscriptionRequest,
-    ) {
+    fun save(request: PushSubscriptionRequest) {
         val subscription =
             pushSubscriptionRepository
-                .findByUserIdAndRole(id, request.role)
+                .findById(request.id)
                 .map { request.toUpdate(it) }
-                .orElseGet { request.toCreate(id) }
+                .orElseGet { request.toCreate() }
 
         pushSubscriptionRepository.save(subscription)
     }

@@ -1,12 +1,14 @@
 package com.application.controller.dto.request
 
 import com.application.domain.entity.User
+import com.application.domain.objects.ExternalProvider
+import com.application.domain.objects.UserRole
 import com.application.domain.objects.UserStatus
 import java.time.Instant
 
 data class UserRequest(
-    var id: String,
-    var username: String,
+    var provider: ExternalProvider,
+    var role: UserRole,
     var name: String,
     var lastName: String?,
     var birthdate: Instant?,
@@ -17,8 +19,9 @@ data class UserRequest(
 ) {
     fun toCreate(): User =
         User(
-            id = id,
-            username = username,
+            id = null,
+            provider = provider,
+            role = role,
             name = name,
             lastName = lastName,
             birthdate = null,

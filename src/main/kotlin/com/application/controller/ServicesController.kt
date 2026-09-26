@@ -1,6 +1,5 @@
 package com.application.controller
 
-import com.application.common.util.Jwt
 import com.application.controller.dto.request.ServiceRequest
 import com.application.controller.dto.response.ServiceResponse
 import com.application.controller.dto.response.ServicesResponse
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestHeader
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
@@ -23,17 +21,15 @@ class ServicesController(
     @PostMapping
     fun save(
         @RequestBody request: ServiceRequest,
-        @RequestHeader authorization: String,
     ) = servicesService
-        .save(request.copy(provider = request.provider.copy(id = Jwt.sub(authorization))))
+        .save(request)
         .let { ServiceResponse.from(it) }
 
     @PutMapping
     fun update(
         @RequestBody request: ServiceRequest,
-        @RequestHeader authorization: String,
     ) = servicesService
-        .update(request.copy(provider = request.provider.copy(id = Jwt.sub(authorization))))
+        .update(request)
         .let { ServiceResponse.from(it) }
 
     @GetMapping("/provider/{id}")
@@ -50,6 +46,5 @@ class ServicesController(
     @DeleteMapping("/{id}")
     fun deleteById(
         @PathVariable id: String,
-        @RequestHeader authorization: String,
-    ) = servicesService.deleteById(Jwt.sub(authorization))
+    ) = servicesService.deleteById(id)
 }

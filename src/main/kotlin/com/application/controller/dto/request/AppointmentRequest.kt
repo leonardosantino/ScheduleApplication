@@ -4,7 +4,6 @@ import com.application.domain.entity.Appointment
 import com.application.domain.entity.RelCustomerProvider
 import com.application.domain.objects.AppointmentStatus
 import com.application.domain.objects.CustomerRel
-import com.application.domain.objects.IdRelCustomerProvider
 import com.application.domain.objects.ProviderRel
 import java.time.Instant
 import java.time.LocalDate
@@ -27,21 +26,24 @@ data class AppointmentRequest(
             time = times.first(),
             times = times,
             status = AppointmentStatus.CONFIRMED.value,
+            cancellation = null,
             createdAt = Instant.now(),
             updatedAt = Instant.now(),
         )
 
     fun toRelCustomerProvider() =
         RelCustomerProvider(
-            id = IdRelCustomerProvider(customer.id, provider.id),
+            id = null,
             customer =
                 CustomerRel(
+                    id = customer.id,
                     name = customer.name,
                     lastName = customer.lastName,
                     phone = customer.phone,
                 ),
             provider =
                 ProviderRel(
+                    id = provider.id,
                     name = provider.name,
                     slug = provider.slug,
                     description = provider.description,

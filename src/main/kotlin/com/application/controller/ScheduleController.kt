@@ -1,6 +1,5 @@
 package com.application.controller
 
-import com.application.common.util.Jwt
 import com.application.controller.dto.request.ScheduleRequest
 import com.application.controller.dto.response.ScheduleResponse
 import com.application.service.ScheduleService
@@ -8,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestHeader
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
@@ -20,8 +18,7 @@ class ScheduleController(
     @PostMapping
     fun save(
         @RequestBody request: ScheduleRequest,
-        @RequestHeader authorization: String,
-    ) = scheduleService.save(request.copy(id = Jwt.sub(authorization))).let { ScheduleResponse.from(it) }
+    ) = scheduleService.save(request).let { ScheduleResponse.from(it) }
 
     @GetMapping("/provider/{id}")
     fun findByProviderId(

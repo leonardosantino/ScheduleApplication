@@ -17,14 +17,13 @@ class PushNotificationService(
 
     fun send(
         id: String,
-        role: String?,
         title: String,
         body: String,
         url: String,
     ) {
         val payload = objectMapper.writeValueAsString(mapOf("title" to title, "body" to body, "url" to url))
 
-        pushSubscriptionRepository.findByUserIdAndRole(id, role).map {
+        pushSubscriptionRepository.findById(id).map {
             try {
                 val state =
                     webPushService.send(
@@ -35,11 +34,11 @@ class PushNotificationService(
                     )
 
                 if (state == WebPush.SubscriptionState.EXPIRED) {
-                    log.warn("push notification is expired user=${it.id} role=$role")
-                    pushSubscriptionRepository.deleteById(it.id.toString())
+                    log.warn("push notification is expired user=${it.id}")
+                    pushSubscriptionRepository.deleteById(it.id)
                 }
             } catch (ex: Exception) {
-                log.error("push notification to user=${it.id} role=$role", ex)
+                log.error("push notification to user=${it.id}", ex)
             }
         }
     }
