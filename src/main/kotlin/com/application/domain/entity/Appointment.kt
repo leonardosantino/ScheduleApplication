@@ -4,7 +4,6 @@ import com.application.domain.objects.AppointmentCancellation
 import com.application.domain.objects.AppointmentCustomer
 import com.application.domain.objects.AppointmentProvider
 import com.application.domain.objects.AppointmentService
-import com.application.domain.objects.AppointmentStatus
 import com.application.domain.objects.UserRole
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
@@ -25,7 +24,5 @@ data class Appointment(
     var createdAt: Instant,
     var updatedAt: Instant,
 ) {
-    fun isCanceled(): Boolean = status == AppointmentStatus.CANCELED.value
-
     fun isCalledByProvider(): Boolean = cancellation?.canceledBy == UserRole.PROVIDER.name
 }

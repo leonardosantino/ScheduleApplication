@@ -19,7 +19,8 @@ services:
 
   scheduledatabase:
     container_name: scheduledatabase
-    image: mongo:7.0
+    image: mongo:8.3.11
+    # linux/arm64/v8
     restart: unless-stopped
     ports:
       - "27017:27017"
