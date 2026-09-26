@@ -7,5 +7,8 @@ import java.util.Optional
 
 @Repository
 interface ProviderRepository : MongoRepository<Provider, String> {
-    fun findBySlugAndStatus(slug: String, status: String): Optional<Provider>
+    fun findBySlugAndStatus(
+        slug: String,
+        status: String,
+    ): Optional<Provider>
 }
