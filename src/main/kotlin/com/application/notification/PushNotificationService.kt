@@ -1,10 +1,10 @@
 package com.application.notification
 
+import com.application.common.util.logger
 import com.application.repository.PushSubscriptionRepository
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.interaso.webpush.WebPush
 import com.interaso.webpush.WebPushService
-import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 
 @Service
@@ -12,7 +12,7 @@ class PushNotificationService(
     private val webPushService: WebPushService,
     private val pushSubscriptionRepository: PushSubscriptionRepository,
 ) {
-    private val log = LoggerFactory.getLogger(javaClass)
+    private val log = logger()
     private val objectMapper = ObjectMapper()
 
     fun send(
@@ -34,11 +34,11 @@ class PushNotificationService(
                     )
 
                 if (state == WebPush.SubscriptionState.EXPIRED) {
-                    log.warn("push notification is expired user=${it.id}")
+                    log.warn("Subscription state expired user=${it.id}")
                     pushSubscriptionRepository.deleteById(it.id)
                 }
             } catch (ex: Exception) {
-                log.error("push notification to user=${it.id}", ex)
+                log.error("Subscription state exception user=${it.id}", ex)
             }
         }
     }

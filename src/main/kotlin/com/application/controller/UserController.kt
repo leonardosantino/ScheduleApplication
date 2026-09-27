@@ -1,5 +1,7 @@
 package com.application.controller
 
+import com.application.common.util.Jwt
+import com.application.common.util.logger
 import com.application.controller.dto.request.UpdatePhoneRequest
 import com.application.controller.dto.request.UserRequest
 import com.application.controller.dto.response.UserResponse
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestHeader
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
@@ -17,12 +20,18 @@ import org.springframework.web.bind.annotation.RestController
 class UserController(
     private val userService: UserService,
 ) {
+    private val log = logger()
+
     @PostMapping
     fun save(
+        @RequestHeader authorization: String,
         @RequestBody request: UserRequest,
     ) = userService
         .save(request)
         .let { UserResponse.from(it) }
+        .also {
+            log.info("Accessing user=${it.id} auth=${Jwt.sub(authorization)}")
+        }
 
     @PatchMapping("/phone")
     fun updatePhone(

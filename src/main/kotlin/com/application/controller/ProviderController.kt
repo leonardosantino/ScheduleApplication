@@ -1,5 +1,7 @@
 package com.application.controller
 
+import com.application.common.util.Jwt
+import com.application.common.util.logger
 import com.application.controller.dto.request.ProviderRequest
 import com.application.controller.dto.response.ProviderResponse
 import com.application.controller.dto.response.RelProvidersResponse
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestHeader
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
@@ -19,15 +22,23 @@ class ProviderController(
     private val providerService: ProviderService,
     private val relCustomerProviderService: RelCustomerProviderService,
 ) {
+    private val log = logger()
+
     @PostMapping
     fun save(
+        @RequestHeader authorization: String,
         @RequestBody request: ProviderRequest,
-    ) = providerService.save(request).let { ProviderResponse.from(it) }
+    ) = providerService.save(request).let { ProviderResponse.from(it) }.also {
+        log.info("Saving provider=${it.id} auth=${Jwt.sub(authorization)}")
+    }
 
     @PutMapping
     fun update(
+        @RequestHeader authorization: String,
         @RequestBody request: ProviderRequest,
-    ) = providerService.update(request).let { ProviderResponse.from(it) }
+    ) = providerService.update(request).let { ProviderResponse.from(it) }.also {
+        log.info("Updating provider=${it.id} auth=${Jwt.sub(authorization)}")
+    }
 
     @GetMapping("/{id}")
     fun findById(
