@@ -3,12 +3,14 @@ package com.application.service
 import com.application.controller.dto.request.UpdatePhoneRequest
 import com.application.controller.dto.request.UserRequest
 import com.application.domain.entity.User
+import com.application.repository.PushSubscriptionRepository
 import com.application.repository.UserRepository
 import org.springframework.stereotype.Service
 
 @Service
 class UserService(
     private val userRepository: UserRepository,
+    private val pushSubscriptionRepository: PushSubscriptionRepository,
 ) {
     fun save(request: UserRequest): User =
         userRepository
@@ -26,4 +28,16 @@ class UserService(
     }
 
     fun findById(id: String) = userRepository.findById(id)
+
+    fun delete(
+        id: String,
+        providerId: String,
+    ) {
+        val user = findById(id).orElseThrow()
+
+        if (user.hasProviderId(providerId)) {
+            userRepository.deleteById(id)
+            pushSubscriptionRepository.deleteById(id)
+        }
+    }
 }

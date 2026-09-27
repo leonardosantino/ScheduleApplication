@@ -21,4 +21,6 @@ class User(
     var status: String,
     var createdAt: Instant,
     var updatedAt: Instant,
-)
+) {
+    fun hasProviderId(providerId: String) = providerId == provider.id
+}
