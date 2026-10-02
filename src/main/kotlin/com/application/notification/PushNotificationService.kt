@@ -2,10 +2,10 @@ package com.application.notification
 
 import com.application.common.util.logger
 import com.application.repository.PushSubscriptionRepository
-import com.fasterxml.jackson.databind.ObjectMapper
 import com.interaso.webpush.WebPush
 import com.interaso.webpush.WebPushService
 import org.springframework.stereotype.Service
+import tools.jackson.databind.json.JsonMapper
 
 @Service
 class PushNotificationService(
@@ -13,7 +13,7 @@ class PushNotificationService(
     private val pushSubscriptionRepository: PushSubscriptionRepository,
 ) {
     private val log = logger()
-    private val objectMapper = ObjectMapper()
+    private val mapper = JsonMapper()
 
     fun send(
         id: String,
@@ -21,7 +21,7 @@ class PushNotificationService(
         body: String,
         url: String,
     ) {
-        val payload = objectMapper.writeValueAsString(mapOf("title" to title, "body" to body, "url" to url))
+        val payload = mapper.writeValueAsString(mapOf("title" to title, "body" to body, "url" to url))
 
         pushSubscriptionRepository.findById(id).map {
             try {

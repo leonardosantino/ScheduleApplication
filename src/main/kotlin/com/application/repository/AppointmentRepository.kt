@@ -5,10 +5,13 @@ import org.springframework.data.mongodb.repository.MongoRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface AppointmentRepository : MongoRepository<Appointment, String> {
-    fun findAllByProviderId(id: String): List<Appointment>
-
-    fun findAllByCustomerId(id: String): List<Appointment>
+interface AppointmentRepository :
+    MongoRepository<Appointment, String>,
+    AppointmentRepositoryTemplate {
+    companion object {
+        const val FIELD_PROVIDER_ID = "provider.id"
+        const val FIELD_CUSTOMER_ID = "customer.id"
+    }
 
     fun findAllByProviderIdAndDateAndStatus(
         id: String,

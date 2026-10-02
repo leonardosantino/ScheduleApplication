@@ -25,7 +25,7 @@ dependencies {
 
     implementation("org.hibernate.validator:hibernate-validator:9.1.3.Final")
     implementation("jakarta.validation:jakarta.validation-api:4.0.0-M1")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+    implementation("tools.jackson.module:jackson-module-kotlin")
 
     kapt("org.springframework.boot:spring-boot-configuration-processor")
 

@@ -1,16 +1,16 @@
 package com.application.common.util
 
-import com.fasterxml.jackson.databind.ObjectMapper
+import tools.jackson.databind.json.JsonMapper
 import java.util.Base64.getUrlDecoder
 
 object Jwt {
-    private val objectMapper = ObjectMapper()
+    private val mapper = JsonMapper()
 
     fun sub(bearer: String): String =
         bearer
             .removePrefix("Bearer")
             .split('.', limit = 3)[1]
-            .let { objectMapper.readTree(getUrlDecoder().decode(it)) }
+            .let { mapper.readTree(getUrlDecoder().decode(it)) }
             .path("sub")
-            .asText()
+            .asString()
 }

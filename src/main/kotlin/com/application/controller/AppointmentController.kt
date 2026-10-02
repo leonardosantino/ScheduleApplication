@@ -2,9 +2,10 @@ package com.application.controller
 
 import com.application.controller.dto.request.AppointmentCancellationRequest
 import com.application.controller.dto.request.AppointmentRequest
+import com.application.controller.dto.request.AppointmentsQueryRequest
 import com.application.controller.dto.response.AppointmentResponse
 import com.application.controller.dto.response.AppointmentsByDateResponse
-import com.application.controller.dto.response.AppointmentsResponse
+import com.application.controller.dto.response.AppointmentsPageResponse
 import com.application.service.AppointmentService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -31,15 +32,17 @@ class AppointmentController(
         @RequestBody request: AppointmentCancellationRequest,
     ) = AppointmentResponse.from(appointmentService.cancel(id, request))
 
-    @GetMapping("/customer/{id}")
-    fun findAllByCustomerId(
+    @PostMapping("/customer/{id}")
+    fun queryByCustomerId(
         @PathVariable id: String,
-    ) = appointmentService.findAllByCustomerId(id).let { AppointmentsResponse.from(it) }
+        @RequestBody request: AppointmentsQueryRequest,
+    ) = appointmentService.findByCustomerId(id, request).let { AppointmentsPageResponse.from(it) }
 
-    @GetMapping("/provider/{id}")
-    fun findAllByProviderId(
+    @PostMapping("/provider/{id}")
+    fun queryByProviderId(
         @PathVariable id: String,
-    ) = appointmentService.findAllByProviderId(id).let { AppointmentsResponse.from(it) }
+        @RequestBody request: AppointmentsQueryRequest,
+    ) = appointmentService.findByProviderId(id, request).let { AppointmentsPageResponse.from(it) }
 
     @GetMapping("/provider/{id}/date/{date}")
     fun findAllByProviderIdAndDate(

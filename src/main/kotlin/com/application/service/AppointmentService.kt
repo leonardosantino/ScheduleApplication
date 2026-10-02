@@ -3,6 +3,7 @@ package com.application.service
 import com.application.common.constants.ExMessage
 import com.application.controller.dto.request.AppointmentCancellationRequest
 import com.application.controller.dto.request.AppointmentRequest
+import com.application.controller.dto.request.AppointmentsQueryRequest
 import com.application.domain.entity.Appointment
 import com.application.domain.objects.AppointmentStatus
 import com.application.exception.BadRequestException
@@ -10,7 +11,10 @@ import com.application.exception.NotFoundException
 import com.application.notification.dto.AppointmentCanceledEvent
 import com.application.notification.dto.AppointmentCreatedEvent
 import com.application.repository.AppointmentRepository
+import com.application.repository.AppointmentRepository.Companion.FIELD_CUSTOMER_ID
+import com.application.repository.AppointmentRepository.Companion.FIELD_PROVIDER_ID
 import org.springframework.context.ApplicationEventPublisher
+import org.springframework.data.domain.Page
 import org.springframework.stereotype.Service
 import java.time.LocalDate
 
@@ -42,9 +46,28 @@ class AppointmentService(
         }
     }
 
-    fun findAllByCustomerId(id: String): List<Appointment> = appointmentRepository.findAllByCustomerId(id)
+    fun findByCustomerId(
+        id: String,
+        request: AppointmentsQueryRequest,
+    ): Page<Appointment> = findByScope(id, FIELD_CUSTOMER_ID, request)
 
-    fun findAllByProviderId(id: String): List<Appointment> = appointmentRepository.findAllByProviderId(id)
+    fun findByProviderId(
+        id: String,
+        request: AppointmentsQueryRequest,
+    ): Page<Appointment> = findByScope(id, FIELD_PROVIDER_ID, request)
+
+    private fun findByScope(
+        id: String,
+        field: String,
+        request: AppointmentsQueryRequest,
+    ): Page<Appointment> =
+        appointmentRepository.findByScope(
+            id = id,
+            field = field,
+            scope = request.scope,
+            page = request.page,
+            size = request.size,
+        )
 
     fun findAllByProviderIdAndDate(
         id: String,
