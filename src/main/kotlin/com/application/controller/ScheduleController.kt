@@ -1,9 +1,8 @@
 package com.application.controller
 
-import com.application.common.util.Jwt
-import com.application.common.util.logger
 import com.application.controller.dto.request.ScheduleRequest
 import com.application.controller.dto.response.ScheduleResponse
+import com.application.security.UserAuth
 import com.application.service.ScheduleService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -17,19 +16,21 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/schedule")
 class ScheduleController(
     private val scheduleService: ScheduleService,
-) {
-    private val log = logger()
-
+) : UserAuth() {
     @PostMapping
     fun save(
         @RequestHeader authorization: String,
         @RequestBody request: ScheduleRequest,
-    ) = scheduleService.save(request).let { ScheduleResponse.from(it) }.also {
-        log.info("Saving schedule=${it.id} auth=${Jwt.sub(authorization)}")
+    ): ScheduleResponse {
+        authorize(request.id, authorization)
+
+        return scheduleService.save(request).let { ScheduleResponse.from(it) }
     }
 
     @GetMapping("/provider/{id}")
     fun findByProviderId(
         @PathVariable id: String,
-    ) = scheduleService.findByProviderId(id).let { ScheduleResponse.from(it) }
+    ) = scheduleService
+        .findByProviderId(id)
+        .let { ScheduleResponse.from(it) }
 }

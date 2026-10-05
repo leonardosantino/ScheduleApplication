@@ -16,11 +16,16 @@ class ServicesService(
     fun update(request: ServiceRequest): Services {
         val service =
             servicesRepository
-                .findById(request.id.orEmpty())
+                .findById(request.id.toString())
                 .orElseThrow { NotFoundException(ExMessage.SERVICE_NOT_FOUND) }
 
         return servicesRepository.save(request.toUpdate(service))
     }
+
+    fun findById(id: String): Services =
+        servicesRepository
+            .findById(id)
+            .orElseThrow { NotFoundException(ExMessage.SERVICE_NOT_FOUND) }
 
     fun findAllByProviderId(id: String): List<Services> = servicesRepository.findAllByProviderId(id)
 

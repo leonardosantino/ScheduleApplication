@@ -29,15 +29,8 @@ class UserService(
 
     fun findById(id: String) = userRepository.findById(id)
 
-    fun delete(
-        id: String,
-        providerId: String,
-    ) {
-        val user = findById(id).orElseThrow()
-
-        if (user.hasProviderId(providerId)) {
-            userRepository.deleteById(id)
-            pushSubscriptionRepository.deleteById(id)
-        }
+    fun deleteById(id: String) {
+        userRepository.deleteById(id)
+        pushSubscriptionRepository.deleteById(id)
     }
 }

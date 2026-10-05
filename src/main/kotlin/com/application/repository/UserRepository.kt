@@ -12,4 +12,9 @@ interface UserRepository : MongoRepository<User, String> {
         id: String,
         role: UserRole,
     ): Optional<User>
+
+    fun existsByIdAndProviderId(
+        id: String,
+        providerId: String,
+    ): Boolean
 }

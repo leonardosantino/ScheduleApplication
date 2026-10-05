@@ -1,10 +1,9 @@
 package com.application.controller
 
-import com.application.common.util.Jwt
-import com.application.common.util.logger
 import com.application.controller.dto.request.ProviderRequest
 import com.application.controller.dto.response.ProviderResponse
 import com.application.controller.dto.response.RelProvidersResponse
+import com.application.security.UserAuth
 import com.application.service.ProviderService
 import com.application.service.RelCustomerProviderService
 import org.springframework.web.bind.annotation.GetMapping
@@ -21,29 +20,31 @@ import org.springframework.web.bind.annotation.RestController
 class ProviderController(
     private val providerService: ProviderService,
     private val relCustomerProviderService: RelCustomerProviderService,
-) {
-    private val log = logger()
-
+) : UserAuth() {
     @PostMapping
     fun save(
         @RequestHeader authorization: String,
         @RequestBody request: ProviderRequest,
-    ) = providerService.save(request).let { ProviderResponse.from(it) }.also {
-        log.info("Saving provider=${it.id} auth=${Jwt.sub(authorization)}")
+    ): ProviderResponse {
+        authorize(request.id, authorization)
+
+        return providerService.save(request).let { ProviderResponse.from(it) }
     }
 
     @PutMapping
     fun update(
         @RequestHeader authorization: String,
         @RequestBody request: ProviderRequest,
-    ) = providerService.update(request).let { ProviderResponse.from(it) }.also {
-        log.info("Updating provider=${it.id} auth=${Jwt.sub(authorization)}")
+    ): ProviderResponse {
+        authorize(request.id, authorization)
+
+        return providerService.update(request).let { ProviderResponse.from(it) }
     }
 
     @GetMapping("/{id}")
     fun findById(
         @PathVariable id: String,
-    ) = providerService.findById(id).map { ProviderResponse.from(it) }
+    ) = providerService.findById(id).let { ProviderResponse.from(it) }
 
     @GetMapping("/slug/{slug}")
     fun findBySlug(

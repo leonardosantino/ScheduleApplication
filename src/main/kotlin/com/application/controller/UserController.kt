@@ -5,6 +5,7 @@ import com.application.common.util.logger
 import com.application.controller.dto.request.UpdatePhoneRequest
 import com.application.controller.dto.request.UserRequest
 import com.application.controller.dto.response.UserResponse
+import com.application.security.UserAuth
 import com.application.service.UserService
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.DeleteMapping
@@ -22,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/users")
 class UserController(
     private val userService: UserService,
-) {
+) : UserAuth() {
     private val log = logger()
 
     @PostMapping
@@ -38,10 +39,13 @@ class UserController(
 
     @PatchMapping("/phone")
     fun updatePhone(
+        @RequestHeader authorization: String,
         @RequestBody request: UpdatePhoneRequest,
-    ) = userService
-        .updatePhone(request)
-        .let { UserResponse.from(it) }
+    ) {
+        authorize(request.id, authorization)
+
+        return userService.updatePhone(request).let { UserResponse.from(it) }
+    }
 
     @GetMapping("/{id}")
     fun findById(
@@ -50,12 +54,14 @@ class UserController(
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    fun delete(
+    fun deleteById(
         @RequestHeader authorization: String,
         @PathVariable id: String,
-    ) = userService
-        .delete(id, Jwt.sub(authorization))
-        .also {
-            log.info("Deleting user=$id auth=${Jwt.sub(authorization)}")
-        }
+    ) {
+        authorize(id, authorization)
+
+        userService
+            .deleteById(id)
+            .also { log.info("Deleting user=$id auth=${Jwt.sub(authorization)}") }
+    }
 }
