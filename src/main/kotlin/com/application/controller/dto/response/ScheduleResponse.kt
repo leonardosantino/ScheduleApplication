@@ -5,12 +5,14 @@ import com.application.domain.entity.Schedule
 data class ScheduleResponse(
     var id: String,
     var days: Map<String, ScheduleDayResponse>?,
+    var unavailability: ScheduleUnavailabilityResponse?,
 ) {
     companion object {
         fun from(schedule: Schedule) =
             ScheduleResponse(
                 id = schedule.id,
-                days = schedule.days.mapValues { ScheduleDayResponse.from(it.value) },
+                days = schedule.days?.mapValues { ScheduleDayResponse.from(it.value) },
+                unavailability = ScheduleUnavailabilityResponse.from(schedule.unavailability),
             )
     }
 }

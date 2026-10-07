@@ -1,6 +1,7 @@
 package com.application.domain.entity
 
 import com.application.domain.objects.ScheduleDay
+import com.application.domain.objects.ScheduleUnavailability
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 import java.time.Instant
@@ -9,7 +10,8 @@ import java.time.Instant
 class Schedule(
     @Id
     var id: String,
-    var days: MutableMap<String, ScheduleDay>,
+    var days: MutableMap<String, ScheduleDay>?,
+    var unavailability: ScheduleUnavailability?,
     var createdAt: Instant?,
     var updatedAt: Instant?,
 )
