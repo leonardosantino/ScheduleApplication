@@ -55,5 +55,5 @@ class AppointmentController(
     fun findAllByProviderIdAndDate(
         @PathVariable id: String,
         @PathVariable date: LocalDate,
-    ) = appointmentService.findAllByProviderIdAndDate(id, date).let { AppointmentsByDateResponse.from(it) }
+    ) = appointmentService.findAllByProviderIdAndDateAndStatusConfirmed(id, date).let { AppointmentsByDateResponse.from(it) }
 }

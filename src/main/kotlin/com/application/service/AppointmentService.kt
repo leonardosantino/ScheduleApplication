@@ -69,7 +69,7 @@ class AppointmentService(
             size = request.size,
         )
 
-    fun findAllByProviderIdAndDate(
+    fun findAllByProviderIdAndDateAndStatusConfirmed(
         id: String,
         date: LocalDate,
     ): List<Appointment> =
