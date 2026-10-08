@@ -45,5 +45,5 @@ object ScheduleAvailabilityUtil {
             .flatMap { it.times() }
             .toSet()
 
-    private fun SchedulePeriod.times() = (time.start..time.end step STEP).toList()
+    private fun SchedulePeriod.times() = (time.start until time.end step STEP).toList()
 }
