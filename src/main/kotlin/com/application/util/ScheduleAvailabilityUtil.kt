@@ -2,6 +2,7 @@ package com.application.util
 
 import com.application.domain.entity.Schedule
 import com.application.domain.objects.ScheduleAvailability
+import com.application.domain.objects.SchedulePeriod
 import java.time.LocalDate
 
 object ScheduleAvailabilityUtil {
@@ -24,7 +25,7 @@ object ScheduleAvailabilityUtil {
             ?.values
             .orEmpty()
             .flatMap { period ->
-                val range = (period.time.start..period.time.end step STEP).toList()
+                val range = period.times()
 
                 range.mapIndexed { index, time -> ScheduleAvailability(time, range.drop(index).take(size)) }
             }.filter { it.time > minTime && it.times.size == size && it.times.none(blocked::contains) }
@@ -41,6 +42,8 @@ object ScheduleAvailabilityUtil {
             .orEmpty()
             .filter { date in LocalDate.parse(it.startDate)..LocalDate.parse(it.endDate) }
             .flatMap { it.periods.values }
-            .flatMap { (it.time.start until it.time.end step STEP).toList() }
+            .flatMap { it.times() }
             .toSet()
+
+    private fun SchedulePeriod.times() = (time.start..time.end step STEP).toList()
 }
