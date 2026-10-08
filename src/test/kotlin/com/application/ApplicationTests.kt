@@ -10,6 +10,5 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDO
 )
 class ApplicationTests {
     @Test
-    fun contextLoads() {
-    }
+    fun contextLoads() {}
 }
