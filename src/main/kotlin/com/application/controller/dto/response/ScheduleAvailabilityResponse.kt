@@ -10,8 +10,3 @@ data class ScheduleAvailabilityResponse(
             ScheduleAvailabilityResponse(availability.map { ScheduleAvailabilityItemResponse(it.time, it.times) })
     }
 }
-
-data class ScheduleAvailabilityItemResponse(
-    val time: Int,
-    val times: List<Int>,
-)

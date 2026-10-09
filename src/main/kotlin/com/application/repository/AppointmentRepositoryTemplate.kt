@@ -12,4 +12,10 @@ interface AppointmentRepositoryTemplate {
         page: Int,
         size: Int,
     ): Page<Appointment>
+
+    fun findByPeriod(
+        providerId: String,
+        from: String,
+        to: String,
+    ): List<Appointment>
 }

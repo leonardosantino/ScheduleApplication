@@ -18,8 +18,13 @@ MongoDB:
     })
     
     db.appointments.createIndex(
-        { "provider._id": 1, "date": 1, "time": 1 },
-        { name: "unique_provider_date_time", unique: true }
+        { "customer._id": 1, "provider._id": 1, "date": 1, "status": 1 },
+        { name: "customer_provider_date_status" }
+    )
+    
+    db.appointments.createIndex(
+        { "provider._id": 1, "date": 1, "time": 1, "status": 1 },
+        { name: "customer_provider_date_status" }
     )
       
     db.providers.createIndex(

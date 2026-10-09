@@ -1,5 +1,6 @@
 package com.application.repository
 
+import com.application.common.constants.DocField
 import com.application.common.constants.Zone
 import com.application.domain.entity.Appointment
 import com.application.domain.objects.AppointmentScope
@@ -17,7 +18,6 @@ class AppointmentRepositoryTemplateImpl(
 ) : AppointmentRepositoryTemplate {
     companion object {
         val entityClass = Appointment::class.java
-        const val ONGOING_TOLERANCE_MINUTES = 30
     }
 
     override fun findByScope(
@@ -29,7 +29,7 @@ class AppointmentRepositoryTemplateImpl(
     ): Page<Appointment> {
         val now = ZonedDateTime.now(Zone.ID_AMERICA_SAO_PAULO)
         val date = now.toLocalDate().toString()
-        val threshold = now.hour * 60 + now.minute - ONGOING_TOLERANCE_MINUTES
+        val threshold = now.hour * 60 + now.minute - DocField.ONGOING_TOLERANCE
 
         val owner = Criteria.where(field).`is`(id)
         val criteria =
@@ -65,5 +65,21 @@ class AppointmentRepositoryTemplateImpl(
         val items = mongoTemplate.find(Query(criteria).with(pageable), entityClass)
 
         return PageImpl(items, pageable, total)
+    }
+
+    override fun findByPeriod(
+        providerId: String,
+        from: String,
+        to: String,
+    ): List<Appointment> {
+        val criteria =
+            Criteria
+                .where(DocField.PROVIDER_ID)
+                .`is`(providerId)
+                .and("date")
+                .gte(from)
+                .lte(to)
+
+        return mongoTemplate.find(Query(criteria), entityClass)
     }
 }

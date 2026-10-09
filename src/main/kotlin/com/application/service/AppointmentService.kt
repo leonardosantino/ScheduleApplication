@@ -1,5 +1,6 @@
 package com.application.service
 
+import com.application.common.constants.DocField
 import com.application.common.constants.ExMessage
 import com.application.controller.dto.request.AppointmentCancellationRequest
 import com.application.controller.dto.request.AppointmentRequest
@@ -11,8 +12,6 @@ import com.application.exception.NotFoundException
 import com.application.notification.dto.AppointmentCanceledEvent
 import com.application.notification.dto.AppointmentCreatedEvent
 import com.application.repository.AppointmentRepository
-import com.application.repository.AppointmentRepository.Companion.FIELD_CUSTOMER_ID
-import com.application.repository.AppointmentRepository.Companion.FIELD_PROVIDER_ID
 import org.springframework.context.ApplicationEventPublisher
 import org.springframework.data.domain.Page
 import org.springframework.stereotype.Service
@@ -49,12 +48,12 @@ class AppointmentService(
     fun findByCustomerId(
         id: String,
         request: AppointmentsQueryRequest,
-    ): Page<Appointment> = findByScope(id, FIELD_CUSTOMER_ID, request)
+    ): Page<Appointment> = findByScope(id, DocField.CUSTOMER_ID, request)
 
     fun findByProviderId(
         id: String,
         request: AppointmentsQueryRequest,
-    ): Page<Appointment> = findByScope(id, FIELD_PROVIDER_ID, request)
+    ): Page<Appointment> = findByScope(id, DocField.PROVIDER_ID, request)
 
     private fun findByScope(
         id: String,
